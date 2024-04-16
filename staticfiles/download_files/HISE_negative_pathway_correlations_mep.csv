@@ -1,0 +1,80 @@
+,Correlation,Adj. P-val,Name,Interacting Cell Type Pathway 1,Interacting Cell Type Pathway 2
+0,-0.3706070993472108,9.987477047115493e-18,send MHC-I receive PTN,"Schwanncells, Osteoblasts, Osteo","T cells, NK cells"
+1,-0.3510443430435307,6.00059412044904e-16,send MHC-II receive PTN,"Schwanncells, Osteo, Osteoblasts",Dendritic cells
+5,-0.3116927814549705,9.965850973368778e-13,send ANGPT receive PTN,"Schwanncells, Osteoblasts, Osteo","ECArteriolar, ECArteriar, ECSinusoidal"
+2,-0.29598802661372187,1.4367145126289016e-11,receive PTN receive SELL,"EoBaso prog, Mono prog, small preB, Neutro prog, NK cells, B cell, Dendritic cells, GranMono prog, GMP, Neutrophils, CMP, T cells, lin, large preB, MPP, CLP, LMPPs, Monocytes","Schwanncells, Osteoblasts, Osteo"
+3,-0.2958991474383763,1.4579126374423672e-11,send MHC-I receive MK,"MSPCAdipo, Osteo, MSPCOsteo","T cells, NK cells"
+6,-0.2903722138168782,3.58911255420343e-11,send MHC-II receive MK,"MSPCAdipo, Osteo, MSPCOsteo",Dendritic cells
+8,-0.27246397681149126,5.826499474313286e-10,send CD34 receive MK,"MSPCAdipo, Osteo, MSPCOsteo",ECSinusoidal
+7,-0.2543539938782297,7.992021492295234e-09,receive MK receive SELL,"EoBaso prog, Mono prog, small preB, Neutro prog, B cell, NK cells, Dendritic cells, GranMono prog, GMP, Neutrophils, CMP, T cells, lin, large preB, MPP, CLP, LMPPs, Monocytes","MSPCAdipo, Osteo, MSPCOsteo"
+13,-0.25365082552179896,8.812349081702725e-09,receive PTN send TGFb,"Schwanncells, Osteoblasts, Osteo",Osteoblasts
+12,-0.25085830278481386,1.295273535604755e-08,send ANGPT receive MK,"MSPCAdipo, Osteo, MSPCOsteo","ECArteriolar, ECArteriar, ECSinusoidal"
+4,-0.24963628313793002,1.5308435450389302e-08,send CD34 receive PTN,"Schwanncells, Osteoblasts, Osteo","HSC, ECSinusoidal"
+11,-0.24767767497347276,1.9973156711440915e-08,send MIF send MHC-I,"T cells, NK cells","B cell, Fibroblasts, Dendritic cells, Myofibroblasts, CLP"
+10,-0.2467684125670871,2.2580912413996803e-08,send MHC-I send VEGF,"T cells, NK cells","ECArteriolar, ECArteriar, ECSinusoidal"
+9,-0.24318796909623355,3.643865038510161e-08,receive PTN receive SELPLG,"Neutrophils, LMPPs, EoBaso prog, Neutro prog, NK cells, Dendritic cells, MEP, GranMono prog, EryMk prog, MPP, lin, HSC, proB, large preB, CLP, Monocytes, Mono prog, B cell, small preB, Ery prog, GMP, CMP, T cells","Schwanncells, Osteo, Osteoblasts"
+14,-0.23058398735533273,1.8513791336616747e-07,receive PTN send SELL,"Schwanncells, Osteo, Osteoblasts","Mono prog, Fibroblasts, GranMono prog, GMP, MPP, CMP, ECArteriar, ECArteriolar, LMPPs"
+15,-0.23036716701495652,1.9023610119163134e-07,receive BAFF receive PTN,Neutrophils,"Schwanncells, Osteo, Osteoblasts"
+16,-0.2200187555887771,6.744066642121853e-07,send FGF receive MK,"MSPCAdipo, Osteo, MSPCOsteo","MSPCAdipo, Chondrocytes, Osteo, Fibroblasts, Schwanncells, Myofibroblasts, Osteoblasts, Smoothmuscle, MSPCOsteo"
+24,-0.2104745031049816,2.0546715231651127e-06,send PARs receive PTN,"Schwanncells, Osteoblasts, Osteo",HSC
+21,-0.20506307457871367,3.7787371290427343e-06,receive MK receive SELPLG,"EoBaso prog, Mono prog, small preB, Neutro prog, NK cells, Dendritic cells, GranMono prog, GMP, MPP, lin, CMP, T cells, proB, CLP, LMPPs, Monocytes","MSPCAdipo, Osteo, MSPCOsteo"
+25,-0.2045506806080934,3.99981597939077e-06,send CD34 send VEGF,ECSinusoidal,"ECArteriolar, ECArteriar, ECSinusoidal"
+19,-0.20136984074497014,5.674653907898138e-06,receive PTN receive PECAM1,"EoBaso prog, Mono prog, small preB, NK cells, B cell, Dendritic cells, GranMono prog, Schwanncells, LMPPs, T cells, Smoothmuscle","Schwanncells, Osteo, Osteoblasts"
+27,-0.19850002989251297,7.743464496531496e-06,send FGF receive PTN,"Schwanncells, Osteoblasts, Osteo","MSPCAdipo, Chondrocytes, Osteo, Fibroblasts, Schwanncells, Myofibroblasts, Osteoblasts, Smoothmuscle, MSPCOsteo"
+20,-0.19589524870684624,1.0227933639582531e-05,send PECAM1 receive PTN,"Schwanncells, Osteo, Osteoblasts","EoBaso prog, Mono prog, small preB, NK cells, B cell, Dendritic cells, GranMono prog, Schwanncells, ECArteriar, LMPPs, ECArteriolar, T cells, Smoothmuscle, ECSinusoidal"
+29,-0.19009395331794404,1.8760648583256716e-05,send MHC-II send VEGF,Dendritic cells,"ECArteriolar, ECArteriar, ECSinusoidal"
+22,-0.18798527084782063,2.328480266065349e-05,receive SELL send VEGF,"EoBaso prog, Mono prog, small preB, NK cells, B cell, Neutro prog, Dendritic cells, GranMono prog, GMP, Neutrophils, T cells, CMP, lin, large preB, MPP, CLP, LMPPs, Monocytes","ECArteriolar, ECArteriar, ECSinusoidal"
+23,-0.18769561300695262,2.3981719279224197e-05,receive PTN receive PARs,"EoBaso prog, Mono prog, NK cells, B cell, Neutro prog, Dendritic cells, GranMono prog, GMP, HSC, CMP, Neutrophils, lin, MPP, CLP, LMPPs, Monocytes","Schwanncells, Osteo, Osteoblasts"
+37,-0.1866194020535925,2.6748355967732093e-05,send MIF send TGFb,"Osteoblasts, B cell, Dendritic cells, CLP","Osteoblasts, Fibroblasts, Myofibroblasts"
+26,-0.1859625754446698,2.8582802884459748e-05,receive MK send SELL,"MSPCAdipo, Osteo, MSPCOsteo","Mono prog, GranMono prog, GMP, MPP, CMP, ECArteriar, ECArteriolar, LMPPs"
+28,-0.18548087188090298,3.000326956256634e-05,receive PTN send SELPLG,"Schwanncells, Osteoblasts, Osteo","EoBaso prog, small preB, Neutro prog, CMP, HSC, large preB, CLP"
+18,-0.18520509486591027,3.0846336879153455e-05,receive MK send SELPLG,"MSPCAdipo, Osteo, MSPCOsteo","EoBaso prog, small preB, Neutro prog, B cell, GranMono prog, CMP, Neutrophils, large preB, CLP, LMPPs"
+38,-0.1838522100137047,3.5317535408116043e-05,receive IFN-II send MHC-II,NK cells,Dendritic cells
+33,-0.18382241376687078,3.542259591941392e-05,send MHC-I receive VISFATIN,"Mono prog, Neutro prog, Mk prog, Erythroblasts, Dendritic cells, MEP, GranMono prog, Ery prog, GMP, CMP, HSC, MPP, lin, CLP, Monocytes","T cells, NK cells"
+36,-0.18329767673011907,3.732199629500611e-05,receive MK send TGFb,"MSPCAdipo, Osteo, MSPCOsteo",Osteoblasts
+40,-0.18184656340390534,4.308912528082393e-05,send ESAM receive PTN,"Schwanncells, Osteoblasts, Osteo","HSC, ECArteriar, ECArteriolar, Smoothmuscle, ECSinusoidal, Pericytes"
+39,-0.18184656340390534,4.308912528082393e-05,receive ESAM receive PTN,"Osteo, Schwanncells, HSC, Osteoblasts, Smoothmuscle, Pericytes","Osteo, Schwanncells, ECArteriar, ECArteriolar, Osteoblasts, ECSinusoidal, Pericytes"
+43,-0.17857422553851104,5.933623158237454e-05,send CD52 receive PTN,"Schwanncells, Osteoblasts, Osteo","small preB, Neutro prog, B cell, Dendritic cells, proB, CLP"
+31,-0.17709216408299386,6.846178125554755e-05,receive GALECTIN receive MK,"lin, Neutro prog, Monocytes","MSPCAdipo, Osteo, MSPCOsteo"
+30,-0.17637610164571965,7.333081574922016e-05,send CCL receive MK,"MSPCAdipo, Osteo, MSPCOsteo","Neutrophils, Monocytes"
+44,-0.1757194557348631,7.808120757495022e-05,receive PECAM1 receive PTN,"Schwanncells, Osteo, Osteoblasts","ECArteriolar, ECArteriar, ECSinusoidal"
+35,-0.17546643531444378,7.998789726143379e-05,send CCL receive PTN,"Schwanncells, Osteo, Osteoblasts","Neutrophils, Monocytes"
+45,-0.17339228287965147,9.73574508806891e-05,send MIF send MHC-II,Dendritic cells,"B cell, Fibroblasts, Dendritic cells, Myofibroblasts, CLP"
+17,-0.17244696707802318,0.00010640031741876682,receive GALECTIN receive PTN,"Neutro prog, Mk prog, Erythroblasts, Osteo, Schwanncells, CMP, lin, CLP, Osteoblasts, LMPPs, Monocytes","ECArteriolar, Schwanncells, Osteo, Osteoblasts"
+41,-0.16921818959551443,0.00014360612126184245,send GALECTIN send MIF,"Neutro prog, B cell, Ery prog, MEP, Dendritic cells, GMP, MPP, lin","B cell, Fibroblasts, Dendritic cells, MEP, GMP, MPP, lin, Myofibroblasts, CLP"
+42,-0.16710731231877607,0.00017419900884009415,send ANGPTL send MHC-I,"small preB, NK cells, large preB, proB, T cells","MSPCAdipo, Chondrocytes, NK cells, B cell, Fibroblasts, Osteo, Dendritic cells, T cells, ECArteriar, Myofibroblasts, CLP, ECArteriolar, Osteoblasts, Smoothmuscle, MSPCOsteo, ECSinusoidal, Pericytes"
+49,-0.1656945550479284,0.0001979801249874328,send CD52 receive MK,"MSPCAdipo, Osteo, MSPCOsteo","small preB, Neutro prog, B cell, Dendritic cells, proB, CLP"
+34,-0.1655142503379197,0.00020122521246834,send MIF receive PARs,"EoBaso prog, Mono prog, NK cells, B cell, Neutro prog, Dendritic cells, GranMono prog, GMP, CMP, Neutrophils, lin, MPP, LMPPs, Monocytes","B cell, Fibroblasts, Dendritic cells, Myofibroblasts, CLP"
+53,-0.16397530827253523,0.0002310214947719698,receive IFN-II send TGFb,NK cells,Osteoblasts
+32,-0.16354787686918415,0.00024000201505562624,send MHC-I send VISFATIN,"T cells, NK cells","ECArteriolar, ECSinusoidal, HSC"
+54,-0.1625556598870099,0.0002621230798741161,send FGF send MIF,"MSPCAdipo, B cell, Fibroblasts, Dendritic cells, Osteo, Schwanncells, Myofibroblasts, CLP, Osteoblasts, Smoothmuscle, MSPCOsteo","MSPCAdipo, Chondrocytes, Osteo, Fibroblasts, Schwanncells, Myofibroblasts, Osteoblasts, Smoothmuscle, MSPCOsteo"
+55,-0.1623480734425296,0.0002669859736293701,send MIF send PECAM1,NK cells,"B cell, Fibroblasts, Dendritic cells, Myofibroblasts, CLP"
+56,-0.1623480734425296,0.0002669859736293701,send MIF receive PECAM1,NK cells,"B cell, Fibroblasts, Dendritic cells, Myofibroblasts, CLP"
+48,-0.16067642482092734,0.0003093328673058075,receive CD34 receive PTN,"EoBaso prog, Neutro prog, Osteo, Schwanncells, HSC, lin, CLP, Osteoblasts","Schwanncells, Osteoblasts, Osteo, Fibroblasts"
+58,-0.1594294103543305,0.00034491986415807307,receive ANGPTL send MHC-I,"Chondrocytes, Osteo, Fibroblasts, Pericytes",T cells
+52,-0.1594135753657807,0.0003453953773524007,send ANGPT send GALECTIN,"EoBaso prog, Mono prog, small preB, NK cells, B cell, Fibroblasts, Dendritic cells, EryMk prog, Osteo, Neutrophils, LMPPs, T cells, Monocytes","ECArteriolar, ECArteriar, ECSinusoidal"
+51,-0.15803087426112641,0.0003893560489711155,receive SELPLG send VCAM,"EoBaso prog, Mono prog, small preB, Neutro prog, NK cells, Dendritic cells, GranMono prog, GMP, MPP, lin, CMP, T cells, CLP, LMPPs, Monocytes","MSPCAdipo, Neutro prog, Myofibroblasts, MSPCOsteo, ECSinusoidal"
+57,-0.15703430660651535,0.0004242141875600293,receive MK send PSAP,"MSPCAdipo, Osteo, MSPCOsteo",Schwanncells
+59,-0.15677300038785247,0.00043382343147731184,receive IFN-II send MHC-I,NK cells,T cells
+50,-0.15650794102949794,0.0004437773689536051,receive SELL send VCAM,"Mono prog, Neutro prog, B cell, NK cells, Dendritic cells, GranMono prog, CMP, T cells, Neutrophils, CLP, LMPPs, Monocytes","MSPCAdipo, Neutro prog, Myofibroblasts, MSPCOsteo, ECSinusoidal"
+47,-0.15598102374876335,0.0004641992516793731,receive SEMA7 receive SELL,"EoBaso prog, Mono prog, small preB, Neutro prog, B cell, NK cells, Dendritic cells, GranMono prog, GMP, CMP, T cells, Neutrophils, lin, large preB, CLP, LMPPs, Monocytes",MSPCOsteo
+60,-0.15574137323384668,0.00047377372874748605,send ANNEXIN receive PTN,"Schwanncells, Osteo, Osteoblasts",Neutrophils
+46,-0.15445932054292486,0.0005281889666316797,receive PARs receive SELL,"EoBaso prog, Mono prog, Neutro prog, NK cells, GranMono prog, GMP, MPP, large preB","EoBaso prog, Mono prog, Neutro prog, NK cells, GranMono prog, GMP, MPP, lin"
+65,-0.15083290125678012,0.0007151496372268282,send CXCL receive PTN,"Schwanncells, Osteoblasts, Osteo","NK cells, Dendritic cells"
+63,-0.14955257351650997,0.0007946467598935178,receive MK receive SEMA4,"Osteoblasts, B cell, Dendritic cells, Monocytes","MSPCAdipo, Osteo, MSPCOsteo"
+68,-0.14845684014305036,0.0008690948557463283,receive IFN-II send SELPLG,NK cells,CLP
+64,-0.1481637420466311,0.000890074461367824,receive IFN-II receive PARs,NK cells,"EoBaso prog, B cell"
+70,-0.14812058964255423,0.0008932024882367853,send CD34 send VCAM,"MSPCAdipo, Neutro prog, Myofibroblasts, MSPCOsteo, ECSinusoidal",ECSinusoidal
+67,-0.14784723838016595,0.0009132543154640348,receive BAFF receive MK,Neutrophils,"MSPCAdipo, Osteo, MSPCOsteo"
+61,-0.14777869222597767,0.0009183473630982628,receive MK send PECAM1,"MSPCAdipo, Osteo, MSPCOsteo","Mono prog, small preB, NK cells, B cell, Dendritic cells, LMPPs, T cells"
+62,-0.14777869222597767,0.0009183473630982628,receive MK receive PECAM1,"Mono prog, small preB, NK cells, B cell, Dendritic cells, LMPPs, T cells","MSPCAdipo, Osteo, MSPCOsteo"
+72,-0.14717899600199646,0.0009640374774804118,send PARs receive SEMA7,MSPCOsteo,"Mk prog, EryMk prog, Ery prog, MEP, Myofibroblasts, ECArteriolar, ECSinusoidal"
+69,-0.14700689257532917,0.000977532250293959,send GALECTIN receive SELL,"small preB, lin","Mono prog, NK cells"
+73,-0.1458864229772307,0.001069740559264494,send PSAP receive PTN,"Osteoblasts, Osteo",Schwanncells
+71,-0.14582564646506693,0.0010749644464583372,send SELPLG send VEGF,small preB,"ECArteriolar, ECArteriar"
+66,-0.1457997499373839,0.0010771974545716841,receive GALECTIN send VCAM,"lin, CMP, CLP","MSPCAdipo, Neutro prog, Myofibroblasts, MSPCOsteo, ECSinusoidal"
+74,-0.14445100572300967,0.0011995865896480638,send MHC-I receive SPP1,"MSPCAdipo, Osteoblasts, Osteo, MSPCOsteo",T cells
+75,-0.14397518582823532,0.0012457346520294026,send ANGPTL send SELPLG,"small preB, B cell, large preB, proB, CLP","MSPCAdipo, Chondrocytes, Osteo, Fibroblasts, ECArteriar, Myofibroblasts, CLP, ECArteriolar, Osteoblasts, Smoothmuscle, MSPCOsteo, ECSinusoidal, Pericytes"
+76,-0.14361826620540846,0.0012814177421987978,send CD34 receive SEMA7,MSPCOsteo,ECSinusoidal
+77,-0.14325003081592005,0.0013192159862374857,receive ICAM send SEMA4,"EoBaso prog, EryMk prog, ECArteriar, ECSinusoidal","small preB, NK cells, B cell, Dendritic cells, Neutrophils, large preB, proB, CLP, T cells, Monocytes"
+78,-0.14324607393072086,0.0013196276615000493,send ANGPTL receive PARs,B cell,Dendritic cells

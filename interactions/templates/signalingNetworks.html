@@ -1,0 +1,53 @@
+{% extends "baser_generic.html" %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+
+<div style="width:90%">
+
+    <h1>Intercellular Signaling Networks</h1>
+    <br>
+    <p>
+        Intercellular interactions in HISE are all based on scRNA-seq data. This data is inherently void
+        of any spatial information. Further, these data do not accurately reflect the proportional make 
+        up of the bone marrow environment. Here, we attempt to elucidate intercellular signaling patterns 
+        taking into account the proportional make up of the bone marrow as well as spatial organization.  
+    </p>
+    <h2>How networks were constructed</h2>
+    <p>Signaling networks were constructed using data from three sources: <b>scRNA-seq</b>, <b><a href="https://en.wikipedia.org/wiki/Cell_sorting" target="_blank">FACS</a></b>,
+        and <b><a href="https://www.akoyabio.com/phenocycler/" target="_blank">Phenocycler</a></b>.
+        Using CellChat on scRNA-seq data, we calculate interaction intesnity values between HSPCs and other
+        cell types. These interaction intesnity values are then adjusted by FACS, data that reveals
+        cell type fraction in the bone marrow. Finally, these values are adjusted by spatial data from 
+        the Phenocycler, specifically, which cells are found within a 50 &#956;m distance from an HSPC at
+        rates significantly higher than random chance.
+    </p>
+    <p>
+        Data for all cell types identified by scRNA-seq is not always obtainable by the other measurement 
+        strategies and therefore, at each step, the model is restricted by the cell types that are 
+        identifiable with the given technologies. For example, with our current set-up, HSCs and MPPs are 
+        not identifiable in Phenocycler data, but KLS (cKit+Lin-Sca+) cells are. In the network diagrams,
+        <b style="color: #FF8181; padding: 2px; border: 2px solid #FF8181; background-color: black;">RED</b> arrows denote signals being sent to HSPCs, 
+        <b style="color: #8FAADC; padding: 2px; border: 2px solid #8FAADC; background-color: black;">BLUE</b> arrows denote signals being sent from HSPCs, 
+        and the thickness of arrows represent the strength of interaction. 
+    </p>
+    <img src="{% static "imgs/cell_cell_signaling_score_calc.png" %}" alt="cell_cell_signaling_score_calc" style="width:90%;"/>
+    <br><br><br><br>
+
+    <h2>Interaction Intensity</h2>
+    <img src="{% static "imgs/interaction_intensity_heatmap.png" %}" alt="interaction_intensity_heatmap" style="width:90%;"/>
+    <img src="{% static "imgs/interaction_intensity_network.png" %}" alt="interaction_intensity_heatmap" style="width:90%;"/>
+    <br><br><br><br><br><br>
+    <h2>Interaction Intensity X Cell Frequency</h2>
+    <img src="{% static "imgs/interaction_intensity_FACS_heatmap.png" %}" alt="interaction_intensity_FACS_heatmap" style="width:90%;"/>
+    <img src="{% static "imgs/interaction_intensity_FACS_network.png" %}" alt="interaction_intensity_FACS_heatmap" style="width:90%;"/>
+    <br><br><br><br><br><br>
+    <h2>Interaction Intensity X Cell Frequency X Interaction Probability</h2>
+    <img src="{% static "imgs/interaction_intensity_FACS_pheno_heatmap.png" %}" alt="interaction_intensity_FACS_pheno_heatmap" style="width:90%;"/>
+    <img src="{% static "imgs/interaction_intensity_FACS_pheno_network.png" %}" alt="interaction_intensity_FACS_pheno_heatmap" style="width:90%;"/>
+
+</div>
+
+
+{% endblock %}

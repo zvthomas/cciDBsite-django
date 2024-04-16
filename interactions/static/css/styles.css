@@ -1,0 +1,103 @@
+.sidebar-nav {
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 0;
+    list-style: none;
+    background-color: #d8d8d1;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border-radius: 6px;
+    height: 100%;
+}
+
+.sidebar-Link {color: rgb(153,0,0);}
+.sidebar-Link:hover {color: #770000;
+                    font-weight: bold;}
+
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -4px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -4px;
+    left: -1px;
+    position: relative;
+    background-color: #000000;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1, h2 {
+  margin-top:10px;
+}
+
+.ohboi:hover{
+  font-weight: bold;
+}
+
+a:hover {
+    color: rgb(36, 200, 241);
+    background-color: transparent;
+  }
+
+.column {
+    float: left;
+    width: 50%;
+  }
+  
+  /* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+    width: 90%;
+}
+
+img {
+  max-width:100%;
+  height:auto;
+}
+
+.dropbtn {
+  border-radius: 10px;
+}
+
+.dropbtn:hover{
+  box-shadow: inset 0 0 0 10em rgba(255, 255, 255, 0.3)
+}
+
+select {
+  border-radius: 10px;
+}
+
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}

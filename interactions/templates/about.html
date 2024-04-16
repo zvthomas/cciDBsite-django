@@ -1,0 +1,124 @@
+{% extends "baser_generic.html" %}
+{% block content %}
+{% load static %}
+<style>
+
+img {
+    padding: 0;
+    display: block;
+    margin: 0 auto;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.titleLink:hover {
+  color: rgb(36, 200, 241);
+  background-color: transparent;
+}
+
+</style>
+
+<div style="width:90%">
+<h1>About HISE</h1>
+
+<p>
+    <b>H</b>ematopoiesis <b>I</b>ntercellular <b>S</b>ignaling <b>E</b>xplorer (HISE) is a database tool for exploration of intercellular communication
+    patterns of hematopoietic stem cells in the mouse bone marrow at the single cell level. To start exploring, 
+    we provide four starting points: <b>Bone Marrow Cell Types</b>, <b>Signaling Pathways</b>, <b>Pathway Correlations</b>, and <b>Genes</b>.
+</p>
+
+<h3>Selecting an HSPC</h3>
+    <p>On the Cell Types, Pathways, and Pathway Correlation pages, you will be met with a menu on the left hand side 
+        prompting you to "Select HSPC Type". Selecting an HSPC will reload the page to display interaction data using 
+        the selected cell (interacting %, intensity, pathway correlations, etc.).
+    </p>
+
+<div class = 'row'>
+
+    <div class = "column">
+        <h3>
+            <a class="titleLink" href="{% url 'cellclasses' %}">Bone Marrow Cell Types</a>
+        </h3>
+        
+        <p>
+            Cell types are split into three categories: non-hematopoietic, blood
+            and immune, and HPCs. Selecting a cell type from the dropdown menu takes you to a page 
+            that displays the details of that cell type. These details include: the pathways 
+            the given cell type is involved in with the selected HSPC (left menu), and a plot to visualize the pathways, 
+            fraction of single cells and interaction scores for the given pathway.
+        </p>        
+        <img src="{% static "imgs/Slide5.jpg" %}" alt="colormap" style="width:90%;"/>
+
+        </div>
+
+    <div class = "column">
+        <h3>
+            <a class="titleLink" href="{% url 'pathways' %}" color="black">Signaling Pathways</a>
+        </h3>
+
+        <p>
+            Like cell types, pathways are split into three categories: secreted signaling, cell-cell contact, 
+            and ECM-Receptor. Selecting a pathway from the dropdown menu takes you to a page 
+            that displays the details of that pathway. These details include: the pathway's 
+            ligands and receptors, the cell types that participate in the pathway with selected HSPC, 
+            and a plot to visualize the fraction of single cells and interaction scores for  
+            the given pathway. This page also links relevant information regarding the pathway and evidence of 
+            its ligand-receptor pairs under "Details on the ___ pathway".
+        </p>
+        <img src="{% static "imgs/Slide7.jpg" %}" alt="colormap" style="width:90%;"/>
+
+    </div>
+
+</div>
+
+<div class = 'row'>
+
+    <div class = "column">
+        <h3>
+            <a class="titleLink" href="{% url 'correlations' %}">Pathway Correlations</a>
+        </h3>
+        
+        <p>
+            Spearman rank correlations at the single cell level were calcualted across all cell type-pathway pairs (i.e. T-cells Receiving MHC-I).
+            Correlations were filtered such that pathways in a pair shared no functional genes.
+            They were then filtered such that their adjusted p-value < 0.05. These correlations were then collapsed to pathway level correlations by 
+            averaging their cell type-pathway pair correlations and taking the best adjusted p-value. Note that because correlations were calculated 
+            at the cell-type-pathway level and combined after being sorted into positive and negative correlations, it is possible that the same 
+            intercellular signaling pathway correlation can be both negative and positive (see VCAM and PARs for an example). This is because Pathway 
+            A and Pathway B may be positively correlated for cell types X,Y, and Z but negatively correlated for cell types Q,R, and S.
+        </p>
+        <img src="{% static "imgs/Slide6.jpg" %}" alt="colormap" style="width:90%;"/>
+
+        </div>
+
+    <div class = "column">
+        <h3>
+            <a class="titleLink" href="{% url 'genes' %}">Genes</a>
+        </h3>
+
+        <p>
+            Genes are split into two groups, <b>ligands</b> and <b>receptors</b>. Selecting a gene 
+            from the dropdown menu takes you to a page that displays the details of the gene. These 
+            details include: the corresponding ligand or receptor, the pathways it is included in, 
+            a link to literature reference supporting the ligand-receptor pair and pathway, 
+            and a link to the corresponding Gene Expression Commons information page (<a href="https://gexc.riken.jp/models/3/genes" target="_blank">Gene Expression Commons</a>).
+        </p>
+        <img src="{% static "imgs/Slide8.jpg" %}" alt="colormap" style="width:90%;"/>
+    </div>
+
+</div>
+    <br>
+    
+    <br>
+    <h3><a href="https://ronglulab.usc.edu/" target="_blank">Lu Lab</a></h3>
+
+    <p>
+        This database was designed and deployed by the Rong Lu Lab at the University of Southern 
+        California. Click <a href="https://ronglulab.usc.edu/" target="_blank">here</a> for more 
+        information about our group.
+        <br><br>
+        {% load static %} <img src="{% static "imgs/Rong-Lu-Lab-2023.jpg" %}" alt="Rong Lu Lab Member Photo 2022" style="width:75%;image-resolution:300dpi"/>
+    </p>
+</div>
+
+{% endblock %}
