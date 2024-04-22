@@ -15,11 +15,20 @@ from django.views import generic
 # -*- coding: utf-8 -*-
 """
 Created on Fri May 15 11:45:07 2020
-@author: aransil
+@author: zthomas
 """
 
 greys = cm.get_cmap('Greys', 10000)
 
+cell_type_proportions = {'CLP':0.075 , 'MPP': 0.391, 'HSC':0.004, 'CMP':0.779, 'GMP':0.385, 'MEP':0.149, 'B cell':8.082, 'Monocytes':3.068, 'T cells':2.336,
+                         'Chondrocytes':0.106, 'EC-Arteriar':0.014, 'EC-Arteriolar':0.03, 'EC-Sinusoidal':0.082, 'Fibroblasts':0.157,
+                         'MSPC-Adipo':0.068, 'MSPC-Osteo':0.020, 'Myofibroblasts':0.003, 'Osteoblasts':0.026, 'Osteoclasts':0.076, 'Pericytes':0.005, 'Schwann-cells':0.002}
+
+KLS_spatial_pvalue = {'B cell':0.983, 'EC-Arterial':0.488, 'EC-Sinusoidal':0.314, 'MSPC-Osteo':1, 'MSPC-Adipo':1, 'T cells':0.02, 'GMP':1, 'MEP':1, 'Monocytes':1, 'HSC':1, 'MPP':1}
+MEP_spatial_pvalue = {'B cell':0.9, 'EC-Arterial':0.998, 'EC-Sinusoidal':0.991, 'MSPC-Osteo':1, 'MSPC-Adipo':1, 'T cells':0.9, 'GMP':1, 'MEP':0.978, 'Monocytes':1, 'HSC':1, 'MPP':1}
+GMP_spatial_pvalue = {'B cell':0.921, 'EC-Arterial':0.998, 'EC-Sinusoidal':0.898, 'MSPC-Osteo':1, 'MSPC-Adipo':1, 'T cells':0.529, 'GMP':1, 'MEP':0.999, 'Monocytes':1, 'HSC':1, 'MPP':1}
+pheno_dicts = {'hsc':KLS_spatial_pvalue, 'mpp':KLS_spatial_pvalue,
+               'mep':MEP_spatial_pvalue, 'gmp':GMP_spatial_pvalue}
 
 import math
 from typing import List
@@ -155,6 +164,15 @@ def getHSPCcookie(request):
 
     return hspcType
 
+def getCorrectionCookie(request):
+
+    correction = request.COOKIES.get("correctionChoice")
+
+    if not correction:
+        correction = 'none'
+    
+    return correction
+
 def normalize_dot_size(min_size, max_size, val, min_p, max_p):
     val = val*(max_size-min_size)
     val = val + min_size
@@ -284,6 +302,8 @@ class PathwayDetailView(generic.DetailView):
         
         hspcType = getHSPCcookie(request)
 
+        correction = getCorrectionCookie(request)
+
         pathway = get_object_or_404(Pathway, pk = kwargs['pk'])
         pactsS = pathwayAndCelltype.objects.filter(pathway= pathway, sorr = 's', hscPercent__range=(0.05,2), hspc_type = hspcType)
         pactsR = pathwayAndCelltype.objects.filter(pathway= pathway, sorr = 'r', hscPercent__range=(0.05,2), hspc_type = hspcType)
@@ -297,7 +317,7 @@ class PathwayDetailView(generic.DetailView):
         receptors = pathway.receptors.all()
 
         if len(pactsS) > 0 or len(pactsR) > 0:
-            plot_div = make_net_graph_JSON(pactsS, pactsR, hspcType, 'cts')
+            plot_div = make_net_graph_JSON(pactsS, pactsR, hspcType, 'cts',correction)
             #plot_div = make_net_graph_spread(pactsS, pactsR, 'cts')
             context = {'pathway': pathway, 'pactsS': pactsS, 'pactsR': pactsR,
                         'plot_div': plot_div, 'ligands':ligands, 'receptors': receptors,
@@ -324,13 +344,22 @@ class CellClassDetailView(generic.DetailView):
         hspcType = getHSPCcookie(request)
 
         cellclass = get_object_or_404(cellClas, pk = kwargs['pk'])
+
+        ctp = 'NA'
+        if str(cellclass) in cell_type_proportions.keys():
+            ctp = cell_type_proportions[str(cellclass)]
+        phenoMeasurement = 'NA'
+        if hspcType in ['hsc' ,'mpp', 'mep', 'gmp']:
+            if str(cellclass) in pheno_dicts[hspcType].keys():
+                phenoMeasurement = pheno_dicts[hspcType][str(cellclass)]
+
         pactsS = pathwayAndCelltype.objects.filter(celltype= cellclass, sorr = 's', hscPercent__range=(0.05,2), hspc_type = hspcType)
         pactsR = pathwayAndCelltype.objects.filter(celltype= cellclass, sorr = 'r', hscPercent__range=(0.05,2), hspc_type = hspcType)
         if len(pactsS) > 0 or len(pactsR) >0:
             plot_div = make_net_graph_JSON(pactsS, pactsR, hspcType, 'paths')
             #plot_div = make_net_graph_spread(pactsS, pactsR, 'paths')
             context = {'cellclass': cellclass, 'pactsS': pactsS, 'pactsR': pactsR,
-                        'plot_div': plot_div, 'hspcType' : hspcType.upper()}
+                        'plot_div': plot_div, 'hspcType' : hspcType.upper(), 'cellTypeProp': ctp, 'phenoPvalue': phenoMeasurement}
             return render(request, 'interactions/cellclas_detail.html', context)
         
         else:
@@ -981,7 +1010,7 @@ def make_net_graph_corr(correlations):
 
     return toret
 
-def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts'):
+def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts', correction = 'none'):
     """ 
     View demonstrating how to display a graph object
     on a web page with Plotly. 
@@ -997,6 +1026,13 @@ def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts'):
     """
     max_score = 0
     min_score = 100
+
+    max_score_facs = 0
+    min_score_facs = 100
+
+    max_score_pheno = 0
+    min_score_pheno = 0
+
     node_names = []
     to_names = []
     from_names = []
@@ -1026,7 +1062,21 @@ def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts'):
         if ct.averageScore > max_score:
             max_score = ct.averageScore
         if ct.averageScore < min_score:
-            min_score = ct.averageScore 
+            min_score = ct.averageScore
+
+        if ct_or_p == 'cts':
+            if cn in cell_type_proportions.keys():
+                if ct.averageScore*cell_type_proportions[cn] > max_score_facs:
+                    max_score_facs = ct.averageScore*cell_type_proportions[cn]
+                if ct.averageScore*cell_type_proportions[cn] < min_score_facs:
+                    min_score_facs = ct.averageScore*cell_type_proportions[cn]
+            if hspc_type in ['hsc', 'mpp', 'mep', 'gmp']:
+                pheno_dict_to_use = pheno_dicts[hspc_type]
+                if cn in pheno_dict_to_use.keys():
+                    if ct.averageScore*cell_type_proportions[cn]*(1/pheno_dict_to_use[cn]) > max_score_pheno:
+                        max_score_pheno = ct.averageScore*cell_type_proportions[cn]*(1/pheno_dict_to_use[cn])
+                    if ct.averageScore*cell_type_proportions[cn]*(1/pheno_dict_to_use[cn]) < min_score_pheno:
+                        min_score_pheno = ct.averageScore*cell_type_proportions[cn]*(1/pheno_dict_to_use[cn])
 
         sending_dict_avgscore_hscP[cn] = [ct.averageScore]
         sending_dict_avgscore_hscP[cn].append(ct.hscPercent)
@@ -1056,6 +1106,20 @@ def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts'):
         if ct.averageScore < min_score:
             min_score = ct.averageScore
 
+        if ct_or_p == 'cts':
+            if cn in cell_type_proportions.keys():
+                if ct.averageScore*cell_type_proportions[cn] > max_score_facs:
+                    max_score_facs = ct.averageScore*cell_type_proportions[cn]
+                if ct.averageScore*cell_type_proportions[cn] < min_score_facs:
+                    min_score_facs = ct.averageScore*cell_type_proportions[cn]
+            if hspc_type in ['hsc', 'mpp', 'mep', 'gmp']:
+                pheno_dict_to_use = pheno_dicts[hspc_type]
+                if cn in pheno_dict_to_use.keys():
+                    if ct.averageScore*cell_type_proportions[cn]*(1/pheno_dict_to_use[cn]) > max_score_pheno:
+                        max_score_pheno = ct.averageScore*cell_type_proportions[cn]*(1/pheno_dict_to_use[cn])
+                    if ct.averageScore*cell_type_proportions[cn]*(1/pheno_dict_to_use[cn]) < min_score_pheno:
+                        min_score_pheno = ct.averageScore*cell_type_proportions[cn]*(1/pheno_dict_to_use[cn])
+
         receiving_dict_avgscore_hscP[cn] = [ct.averageScore]
         receiving_dict_avgscore_hscP[cn].append(ct.hscPercent)
         receiving_dict_avgscore_hscP[cn].append(t)
@@ -1080,42 +1144,106 @@ def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts'):
     urlList = []
     k = 0
     for i in sending_dict_avgscore_hscP.keys():
+
+        correction_coeff = 1
+        if correction == 'facs':
+            if i in cell_type_proportions.keys():
+                correction_coeff = cell_type_proportions[i]
+
+                range = max_score_facs - min_score_facs
+                a = sending_dict_avgscore_hscP[i][0]*correction_coeff
+                if range != 0:
+                    a = (a - min_score) / range
+                range2 = 9999
+                a = (a * range2)
+                fill_color.append(mpl.colors.to_hex(greys(int(a))))
+
+            else:
+                continue
+        elif correction == 'phenocycler':
+            if hspc_type not in pheno_dicts.keys():
+                break
+            if i in KLS_spatial_pvalue.keys():
+                correction_coeff = cell_type_proportions[i]*(1/pheno_dicts[hspc_type][i])
+
+                range = max_score_pheno - min_score_pheno
+                a = sending_dict_avgscore_hscP[i][0]*correction_coeff*(1/pheno_dicts[hspc_type][i])
+                if range != 0:
+                    a = (a - min_score) / range
+                range2 = 9999
+                a = (a * range2)
+                fill_color.append(mpl.colors.to_hex(greys(int(a))))
+            else:
+                continue
+        else:
+            range = max_score - min_score
+            a = sending_dict_avgscore_hscP[i][0]
+            if range != 0:
+                a = (a - min_score) / range
+            range2 = 9999
+            a = (a * range2)
+            fill_color.append(mpl.colors.to_hex(greys(int(a))))
+
+
         node_names.append(i + "_" + str(k))
         ecs.append(get_ec(sending_dict_avgscore_hscP[i][2], ct_or_p))
-
-        range = max_score - min_score
-        a = sending_dict_avgscore_hscP[i][0]
-        if range != 0:
-            a = (a - min_score) / range
-        range2 = 9999
-        a = (a * range2)
-        fill_color.append(mpl.colors.to_hex(greys(int(a))))
-
         height.append(sending_dict_avgscore_hscP[i][1]*60 + 10)
         
-        avgscore.append(sending_dict_avgscore_hscP[i][0])
+        avgscore.append(sending_dict_avgscore_hscP[i][0]*correction_coeff)
         hscPercent.append(100*sending_dict_avgscore_hscP[i][1])
         edges.append('#8FAADC')
         to_names.append(i +"_" + str(k))
         from_names.append(center_cell)
         urlList.append(sending_dict_avgscore_hscP[i][3])
         k += 1
+
     for i in receiving_dict_avgscore_hscP.keys():
+
+        correction_coeff = 1
+        if correction == 'facs':
+            if i in cell_type_proportions.keys():
+                correction_coeff = cell_type_proportions[i]
+
+                range = max_score_facs - min_score_facs
+                a = receiving_dict_avgscore_hscP[i][0]*correction_coeff
+                if range != 0:
+                    a = (a - min_score) / range
+                range2 = 9999
+                a = (a * range2)
+                fill_color.append(mpl.colors.to_hex(greys(int(a))))
+
+            else:
+                continue
+        elif correction == 'phenocycler':
+            if hspc_type not in pheno_dicts.keys():
+                break
+            if i in KLS_spatial_pvalue.keys():
+                correction_coeff = cell_type_proportions[i]*(1/pheno_dicts[hspc_type][i])
+
+                range = max_score_pheno - min_score_pheno
+                a = receiving_dict_avgscore_hscP[i][0]*correction_coeff*(1/pheno_dicts[hspc_type][i])
+                if range != 0:
+                    a = (a - min_score) / range
+                range2 = 9999
+                a = (a * range2)
+                fill_color.append(mpl.colors.to_hex(greys(int(a))))
+            else:
+                continue
+        else:
+            range = max_score - min_score
+            a = receiving_dict_avgscore_hscP[i][0]
+            if range != 0:
+                a = (a - min_score) / range
+            range2 = 9999
+            a = (a * range2)
+            fill_color.append(mpl.colors.to_hex(greys(int(a))))
+
+
         node_names.append(i +"_" + str(k))
         ecs.append(get_ec(receiving_dict_avgscore_hscP[i][2], ct_or_p))
-
-
-        range = max_score - min_score
-        a = receiving_dict_avgscore_hscP[i][0]
-        if range != 0:
-            a = (a - min_score) / range
-        range2 = 9999
-        a = (a * range2)
-        fill_color.append(mpl.colors.to_hex(greys(int(a))))
-
         height.append(receiving_dict_avgscore_hscP[i][1]*60 + 10)
 
-        avgscore.append(receiving_dict_avgscore_hscP[i][0])
+        avgscore.append(receiving_dict_avgscore_hscP[i][0]*correction_coeff)
         hscPercent.append(100*receiving_dict_avgscore_hscP[i][1])
         from_names.append(i +"_" + str(k))
         edges.append('#FF8181')

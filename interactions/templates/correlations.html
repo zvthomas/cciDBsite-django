@@ -491,7 +491,7 @@ function show_plot(){
     chart.nodes().labels().enabled(true);
     chart.nodes().labels().format("{%name}")
     chart.nodes().labels().fontSize(14);
-    chart.nodes().labels().fontWeight(600);
+    //chart.nodes().labels().fontWeight(600);
     chart.nodes().labels().fontColor('black');
     chart.nodes().tooltip().useHtml(true);
     chart.edges().tooltip().useHtml(true);
@@ -647,14 +647,14 @@ function show_genemap_1(){
     chart.nodes().labels().enabled(true);
     chart.nodes().labels().format("{%id}");
     chart.nodes().labels().fontSize(14);
-    chart.nodes().labels().fontWeight(600);
+    //chart.nodes().labels().fontWeight(600);
     chart.nodes().labels().fontColor('black');
     chart.nodes().tooltip().useHtml(true);
     chart.edges().tooltip().useHtml(true);
     
     chart.group(getradio1()).labels().fontColor('red');
     chart.group(getradio1()).labels().fontSize(20);
-    chart.group(getradio1()).labels().fontWeight(700);
+    //chart.group(getradio1()).labels().fontWeight(700);
     
     chart.tooltip().format(function() {
       if (this.type == "node"){
@@ -682,12 +682,12 @@ function show_genemap_1(){
           for (var i = 0; i < myGroups.length; i++){
             chart.group(myGroups[i]).labels().fontColor("black");
             chart.group(myGroups[i]).labels().fontSize(14);
-            chart.group(myGroups[i]).labels().fontWeight(100);
+            //chart.group(myGroups[i]).labels().fontWeight(100);
           } 
           
           chart.group(this.value).labels().fontColor('red');
           chart.group(this.value).labels().fontSize(20);
-          chart.group(this.value).labels().fontWeight(700);
+          //chart.group(this.value).labels().fontWeight(700);
       });
     }
 
@@ -769,14 +769,14 @@ function show_genemap_2(){
     chart2.nodes().labels().enabled(true);
     chart2.nodes().labels().format("{%id}");
     chart2.nodes().labels().fontSize(14);
-    chart2.nodes().labels().fontWeight(600);
+    //chart2.nodes().labels().fontWeight(600);
     chart2.nodes().labels().fontColor('black');
     chart2.nodes().tooltip().useHtml(true);
     chart2.edges().tooltip().useHtml(true);
 
     chart2.group(getradio2()).labels().fontColor('red');
     chart2.group(getradio2()).labels().fontSize(20);
-    chart2.group(getradio2()).labels().fontWeight(700);
+    //chart2.group(getradio2()).labels().fontWeight(700);
 
     chart2.tooltip().format(function() {
       if (this.type == "node"){
@@ -804,12 +804,12 @@ function show_genemap_2(){
           for (var i = 0; i < myGroups.length; i++){
             chart2.group(myGroups[i]).labels().fontColor("black");
             chart2.group(myGroups[i]).labels().fontSize(14);
-            chart2.group(myGroups[i]).labels().fontWeight(100);
+            //chart2.group(myGroups[i]).labels().fontWeight(100);
           } 
           
           chart2.group(this.value).labels().fontColor('red');
           chart2.group(this.value).labels().fontSize(20);
-          chart2.group(this.value).labels().fontWeight(700);
+          //chart2.group(this.value).labels().fontWeight(700);
       });
     }
 

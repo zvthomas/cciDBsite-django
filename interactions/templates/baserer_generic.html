@@ -41,7 +41,14 @@
                         <input type="radio" id="mep" name="hspc_cell_type" value="MEP">
                         <label for="mep">MEP</label><br>
                     </form>
-
+                    <br>
+                    <h6>Cell-Cell Signaling Score Correction</h6>
+                    <form name = 'signaling_correction'>
+                        <label for="none"><input type="radio" id="none" name="score_correction"> None</label><br>
+                        <label for="facs" style="float: left"><input type="radio" id="facs" name="score_correction"> Bone Marrow Cell Type Proportion</label><br>
+                        <label for="phenocycler"><input type="radio" id="phenocycler" name="score_correction"> Bone Marrow Cell Type Proportion & Spatial Interaction (HSC, MPP, MEP, GMP only)</label><br>
+                    </form>
+                    <li><i>*Selecting a signaling score correction may reduce the number of cell types due to data availability</i></li>
                     <li><br></li>
                     <li><a class='sidebar-Link' href="{% url 'cellclasses' %}">Bone Marrow Cell Types</a></li>
                     <li><a class='sidebar-Link' href="{% url 'pathways' %}">Signaling Pathways</a></li>
@@ -79,15 +86,35 @@
       });
     }
 
+    var selected_correction = document.signaling_correction.score_correction;
+    var previous_correction = null;
+    for (var i = 0; i < selected_correction.length; i++) {
+        selected_correction[i].addEventListener('change', function() {
+          (previous_correction) ? console.log(previous_correction.value): null;
+          if (this !== previous_correction) {
+            previous_correction = this;
+            //localStorage.setItem("hspcChoice", this.id);
+            //var itemValue = localStorage.getItem("hspcChoice");
+            setCookie("correctionChoice",this.id,1);
+            window.location.reload();
+          }
+      });
+    }
+
     function get_hspc_name(){
         //var hspcValue = localStorage.getItem("hspcChoice");
         var hspcValue = getCookie("hspcChoice");
         document.getElementById(hspcValue).checked = true;
     }
 
+    function get_correction(){
+        var correctionValue = getCookie("correctionChoice");
+        document.getElementById(correctionValue).checked = true;
+    }
 
     function window_refresh(){
         get_hspc_name();
+        get_correction();
     }
     
     function setCookie(cname, cvalue, exdays) {
