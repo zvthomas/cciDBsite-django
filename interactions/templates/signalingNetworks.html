@@ -15,7 +15,8 @@
         taking into account the proportional make up of the bone marrow as well as spatial organization.  
     </p>
     <h2>How networks were constructed</h2>
-    <p>Signaling networks were constructed using data from three sources: <b>scRNA-seq</b>, <b><a href="https://en.wikipedia.org/wiki/Cell_sorting" target="_blank">FACS</a></b>,
+    <p>Signaling networks were constructed using data from three sources: <b>scRNA-seq</b>, 
+        <b><a href="https://en.wikipedia.org/wiki/Cell_sorting" target="_blank">FACS</a></b>,
         and <b><a href="https://www.akoyabio.com/phenocycler/" target="_blank">Phenocycler</a></b>.
         Using CellChat on scRNA-seq data, we calculate interaction intesnity values between HSPCs and other
         cell types. These interaction intesnity values are then adjusted by FACS, data that reveals
@@ -28,9 +29,10 @@
         strategies and therefore, at each step, the model is restricted by the cell types that are 
         identifiable with the given technologies. For example, with our current set-up, HSCs and MPPs are 
         not identifiable in Phenocycler data, but KLS (cKit+Lin-Sca+) cells are. In the network diagrams,
-        <b style="color: #FF8181; padding: 2px; border: 2px solid #FF8181; background-color: black;">RED</b> arrows denote signals being sent to HSPCs, 
-        <b style="color: #8FAADC; padding: 2px; border: 2px solid #8FAADC; background-color: black;">BLUE</b> arrows denote signals being sent from HSPCs, 
-        and the thickness of arrows represent the strength of interaction. 
+        <b style="color: #FF8181; padding: 2px; border: 2px solid #FF8181; background-color: black;">RED</b> 
+        arrows denote signals in which HSPCs are targets, 
+        <b style="color: #8FAADC; padding: 2px; border: 2px solid #8FAADC; background-color: black;">BLUE</b> 
+        arrows denote signals sourced from HSPCs, and the thickness of arrows represent the strength of interaction. 
     </p>
     <img src="{% static "imgs/cell_cell_signaling_score_calc.png" %}" alt="cell_cell_signaling_score_calc" style="width:90%;"/>
     <br><br><br><br>

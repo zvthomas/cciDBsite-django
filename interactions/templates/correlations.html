@@ -149,7 +149,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 <h3>How Correlations were Calculated</h3>
 <p>
-    Spearman rank correlations at the single cell level were calcualted across all cell type-pathway pairs  (i.e. T-cells Receiving MHC-I).
+    Spearman rank correlations at the single cell level were calcualted across all cell type-pathway pairs  (i.e. HSC source T-cells MHC-I target).
     Correlations were filtered such that pathways in a pair shared no functional genes.
     They were then filtered such that their adjusted p-value < 0.05. These correlations were then collapsed to pathway level correlations by 
     averaging their cell type-pathway pair correlations and taking the best adjusted p-value. 
@@ -157,8 +157,8 @@ input[type=range]:focus::-ms-fill-upper {
 </p>
 
       <p>
-    The highest positive correlation in HSCs is between HSCs 
-    sending SELPLG and HSCs receiving CD34 (r = 0.736). The highest negative correlations in HSCs is between HSCs sending MHC-I and HSCs sending PARs 
+    The highest positive correlation in HSCs is between HSC SELPLG source and HSC CD34 target (r = 0.736).
+    The highest negative correlations in HSCs is between HSC MHC-I source and HSC PARs target 
     (r = -0.403).
       </p>
     <div class="row">
@@ -179,7 +179,7 @@ input[type=range]:focus::-ms-fill-upper {
     By selecting a correlation, the pathways with correlations greater than the selected threshold, therefore, choosing 0 for both 
     thresholds will show all pathway correlations with adjusted p-value < 0.05. <br><b>Select an edge</b> to automatically view the pathway gene networks of the attached nodes 
     on the plots beneath the correlation plot.<br><b>Two gene network</b> plots to explore a specific pathway's gene networks. 
-    By selecting a pathway and toggling either "{{ hspcType }}s Receiving" or "{{ hspcType }}s Sending", you can 
+    By selecting a pathway and toggling either "{{ hspcType }}s Target" or "{{ hspcType }}s Source", you can 
     highlight the associated genes that influence a cell's pathway score (i.e. Selp in {{ hspcType }}s Receiving CD34).
     
     </p>
@@ -249,8 +249,8 @@ input[type=range]:focus::-ms-fill-upper {
     <div class="wrapper" style="width: 90%;">
     <ul>
         <li style="display:inline;"><b>Node Color:</b></li>
-        <li style="display:inline; color:#458045"><b><span style='font-size:30px;'>&#9679;</span> {{ hspcType }} Receiving (Receptor Expression)</b></li>
-        <li style="display:inline; color:#9e4d9e"><b><span style='font-size:30px;'>&#9679;</span>{{ hspcType }} Sending (Ligand Expression)</b></li>
+        <li style="display:inline; color:#458045"><b><span style='font-size:30px;'>&#9679;</span> {{ hspcType }} as Target (Receptor Expression)</b></li>
+        <li style="display:inline; color:#9e4d9e"><b><span style='font-size:30px;'>&#9679;</span>{{ hspcType }} as Source (Ligand Expression)</b></li>
     </ul>
     <ul>
         <li style="display:inline;"><b>Edge Color:</b></li>
@@ -279,9 +279,9 @@ input[type=range]:focus::-ms-fill-upper {
   <form name="myForm">
   <label>Choose signaling type: </label>
     <input type="radio" id="receptor" name="fav_language" value="receptor" style="color:#458045">
-    <label for="receptor" style="color:#458045"><b>{{ hspcType }}s Receiving</b></label>
+    <label for="receptor" style="color:#458045"><b>{{ hspcType }}s Target</b></label>
     <input type="radio" id="ligand" name="fav_language" value="ligand" style="color:#9e4d9e" checked>
-    <label for="ligand" style="color:#9e4d9e"><b>{{ hspcType }}s Sending</b></label>
+    <label for="ligand" style="color:#9e4d9e"><b>{{ hspcType }}s Source</b></label>
     
   </form>
   <img src="{% static 'imgs/ligand.png' %}" alt="colormap" style="height:40px;"/> <strong>Ligand</strong><img src="{% static 'imgs/receptor.png' %}" alt="colormap" style="height:40px;"/> <strong>Receptor</strong>
@@ -304,9 +304,9 @@ input[type=range]:focus::-ms-fill-upper {
   <form name="myForm2">
     <label>Choose signaling type: </label>
       <input type="radio" id="receptor2" name="fav_language2" value="receptor2" style="color:#458045">
-      <label for="receptor2" style="color:#458045"><b>{{ hspcType }}s Receiving</b></label>
+      <label for="receptor2" style="color:#458045"><b>{{ hspcType }}s Target</b></label>
       <input type="radio" id="ligand2" name="fav_language2" value="ligand2" style="color:#9e4d9e" checked>
-      <label for="ligand2" style="color:#9e4d9e"><b>{{ hspcType }}s Sending</b></label>
+      <label for="ligand2" style="color:#9e4d9e"><b>{{ hspcType }}s Source</b></label>
       
     </form>
   <img src="{% static 'imgs/ligand.png' %}" alt="colormap" style="height:40px;"/> <strong>Ligand</strong><img src="{% static 'imgs/receptor.png' %}" alt="colormap" style="height:40px;"/> <strong>Receptor</strong>
@@ -502,22 +502,22 @@ function show_plot(){
         t1 = this.id.split("_");
         p1 = t1[0];
         t1 = t1[1];
-        t1 = t1 === "S" ? "sending " : "receiving ";
+        t1 = t1 === "S" ? " source" : " target";
 
-        return "<span style='font-weight:bold'>" + "{{ hspcType }}s " + t1 + p1 + "</span>";
+        return "<span style='font-weight:bold'>" + "{{ hspcType }}s " + p1 + t1 + "</span>";
 
       } else {
         
         t1 = this.getData("to").split("_");
         p1 = t1[0];
         t1 = t1[1];
-        t1 = t1 === "S" ? "sending " : "receiving ";
+        t1 = t1 === "S" ? " source" : " target";
         t2 = this.getData("from").split("_");
         p2 = t2[0];
         t2 = t2[1];
-        t2 = t2 === "S" ? "sending " : "receiving ";
+        t2 = t2 === "S" ? " source" : " target";
 
-        return "{{ hspcType }}s " + t1 + p1 + " --- " + "{{ hspcType }}s " + t2 + p2 + "<br> Correlation: " + this.getData("correlation").toFixed(3) + "<br> -log10(Adj. P-val): " + -1*Math.log10(this.getData("pval")).toFixed(3);
+        return "{{ hspcType }}s " + p1 + t1 + " --- " + "{{ hspcType }}s " + p2 + t2 + "<br> Correlation: " + this.getData("correlation").toFixed(3) + "<br> -log10(Adj. P-val): " + -1*Math.log10(this.getData("pval")).toFixed(3);
       }
     });
 

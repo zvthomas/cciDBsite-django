@@ -39,7 +39,7 @@
     <h1><b>H</b>ematopoiesis <b>I</b>ntercellular <b>S</b>ignaling <b>E</b>xplorer (HISE)</h1>
     <p>
         Welcome to HISE, a webiste developed by the <b><em>Lu Lab</em></b> to display putative interactions between hematopoietic stem and progenitor cells
-        and their microenvironment at the single cell level! We provide a few starting points in the left menu, or continue on this page to read more 
+        and their microenvironment at the single-cell level! We provide a few starting points in the left menu, or continue on this page to read more 
         about the data used and how predictions were made.</p>
     <div class="row">
         <div class="column">
@@ -56,8 +56,8 @@
     <p>
         Using CellChat (<a href="https://www.nature.com/articles/s41467-021-21246-9" target="_blank">Jin, et. al</a>), individual HSPCs were treated as
         distinct populations and their intercellular communications with their microenvironment were predicted. These predictions are based on scRNA
-        expression of corresponding ligands and receptors in the sending and receiving cells respectively. These generated thousands of 
-        Pathway-Cell Type Pairs with at least 5% single cell activity. The Pathway-Cell Type Pairs were also used to generate
+        expression of corresponding ligands and receptors in the source and target cells, respectively. These generated thousands of 
+        Pathway-Cell Type Pairs with at least 5% single-cell activity. The Pathway-Cell Type Pairs were also used to generate
         <a href="{% url 'correlations' %}">pathway-pathway correlations</a>. These correlations were calculated using a Spearman rank correlations.
     </p>
 
@@ -69,9 +69,9 @@
 
 <h2>Data Sources</h2>
     <p>
-        Single cell RNA-seq data for hematopoietic stem and progenitor cells were collected in the lab. Single cell RNA-seq data for non-hematopoietic cells
+        Single-cell RNA-seq data for hematopoietic stem and progenitor cells were collected in the lab. Single-cell RNA-seq data for non-hematopoietic cells
         comes from <a href="https://www.frontiersin.org/articles/10.3389/fcell.2021.622519/full" target="_blank">Dolgalev & Tikhonova</a>.
-        Single cell RNA-seq data for blood and immune cells comes from <a href="https://www.nature.com/articles/s41556-019-0439-6" target="_blank">Baccin, et. al</a>. 
+        Single-cell RNA-seq data for blood and immune cells comes from <a href="https://www.nature.com/articles/s41556-019-0439-6" target="_blank">Baccin, et. al</a>. 
         The number of pathways, cell types, and genes used are as follows:
         
         <li><strong><a href="{% url 'cellclasses' %}">Cell Types</a>:</strong> {{num_cell_types}} </li>

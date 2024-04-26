@@ -305,8 +305,8 @@ class PathwayDetailView(generic.DetailView):
         correction = getCorrectionCookie(request)
 
         pathway = get_object_or_404(Pathway, pk = kwargs['pk'])
-        pactsS = pathwayAndCelltype.objects.filter(pathway= pathway, sorr = 's', hscPercent__range=(0.05,2), hspc_type = hspcType)
-        pactsR = pathwayAndCelltype.objects.filter(pathway= pathway, sorr = 'r', hscPercent__range=(0.05,2), hspc_type = hspcType)
+        pactsS = pathwayAndCelltype.objects.filter(pathway= pathway, sorr = 's', hscPercent__gt=0.05, hspc_type = hspcType)
+        pactsR = pathwayAndCelltype.objects.filter(pathway= pathway, sorr = 't', hscPercent__gt=0.05, hspc_type = hspcType)
         evidenceList = pathway.evidences
         pmids, keggs, pmcs = get_evidence_list(evidenceList)
 
@@ -327,7 +327,6 @@ class PathwayDetailView(generic.DetailView):
         
         else:
             return render(request, 'interactions/pathway_detail.html', context = {'pathway': pathway,'ligands':ligands, 'receptors': receptors, 'hspcType' : hspcType.upper()})
-
 
 class CellClassListView(generic.ListView):
     model = cellClas
@@ -354,7 +353,7 @@ class CellClassDetailView(generic.DetailView):
                 phenoMeasurement = pheno_dicts[hspcType][str(cellclass)]
 
         pactsS = pathwayAndCelltype.objects.filter(celltype= cellclass, sorr = 's', hscPercent__range=(0.05,2), hspc_type = hspcType)
-        pactsR = pathwayAndCelltype.objects.filter(celltype= cellclass, sorr = 'r', hscPercent__range=(0.05,2), hspc_type = hspcType)
+        pactsR = pathwayAndCelltype.objects.filter(celltype= cellclass, sorr = 't', hscPercent__range=(0.05,2), hspc_type = hspcType)
         if len(pactsS) > 0 or len(pactsR) >0:
             plot_div = make_net_graph_JSON(pactsS, pactsR, hspcType, 'paths')
             #plot_div = make_net_graph_spread(pactsS, pactsR, 'paths')
@@ -385,7 +384,6 @@ class LigandDetailView(generic.DetailView):
                     'pmids' : pmids, 'keggs' : keggs, 'pmcs' : pmcs}
 
         return render(request, 'interactions/gene_detail.html', context = context)
-
 
 class ReceptorDetailView(generic.DetailView):
 

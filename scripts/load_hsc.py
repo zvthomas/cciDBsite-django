@@ -163,7 +163,7 @@ def run():
                                                     celltype = ct,
                                                     hscPercent = nzfa[0],
                                                     averageScore = nzfa[1],
-                                                    sorr = 'r',
+                                                    sorr = 't',
                                                     hspc_type = HSPC_TYPE)
                 
     
@@ -228,15 +228,17 @@ def run():
 
         pos_correlations = pd.read_csv("P:/zthomas/Intercellular Interactions Project/cluster_analysis/pathway_correlations/pos_correlations_hide_" + HSPC_TYPE + ".csv")
         neg_correlations = pd.read_csv("P:/zthomas/Intercellular Interactions Project/cluster_analysis/pathway_correlations/neg_correlations_hide_" + HSPC_TYPE + ".csv")
-            
+        
+        # change send and receive to source and target
+        name_change = {'s':'s', 'r':'t'}
         for i in [pos_correlations, neg_correlations]:
                 for row in i.index:
                     cor = i.loc[row,]
 
                     p1 = cor['node1'].split()[1:][0]
-                    p1a = cor['node1'].split()[0][0]
+                    p1a = name_change[cor['node1'].split()[0][0]]
                     p2 = cor['node2'].split()[1:][0]
-                    p2a = cor['node2'].split()[0][0]
+                    p2a = name_change[cor['node2'].split()[0][0]]
 
                     corr = cor['Correlation']
                     pval = cor['Adj. P-val']

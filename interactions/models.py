@@ -114,8 +114,8 @@ class Receptor(models.Model):
 class pathwayAndCelltype(models.Model):
     
     SIGNAL_STATUS = (
-        ('s', 'Sending'),
-        ('r', 'Receiving')
+        ('s', 'Source'),
+        ('t', 'Target')
     )
 
     pathway = models.ForeignKey(Pathway,on_delete=models.SET_NULL, null=True)
@@ -141,8 +141,8 @@ class pathwayAndCelltype(models.Model):
 class pathwayCorrelations(models.Model):
     
     SIGNAL_STATUS = (
-        ('s', 'Sending'),
-        ('r', 'Receiving')
+        ('s', 'Source'),
+        ('t', 'Target')
     )
 
     #

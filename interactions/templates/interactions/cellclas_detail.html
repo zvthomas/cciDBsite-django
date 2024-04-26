@@ -37,7 +37,7 @@
     <body>
       <div id="container" style="width: 100%; height: 600px; border:1px solid black;"></div>
       {% load static %} <img src="{% static "imgs/grey_colormap.png" %}" alt="colormap" style="width:100%;height:20px;"/>
-      <div class="wrapper" style="width: 100%;"><p style="text-align:center">Average Probability Score</p>
+      <div class="wrapper" style="width: 100%;"><p style="text-align:center">Average Interaction Intensity</p>
 
       <form name="myForm">
       <!-- <p><u>Select Cell Type to Highlight</u></p> -->
@@ -82,7 +82,7 @@
 
   <div class="row">
     <div class="column">
-       <p><strong>Pathways that {{ cellclass.name }} receive from {{ hspcType }}s</strong></p>
+       <p><strong>Pathways in which {{ hspcType }} source {{ cellclass.name }}s</strong></p>
       <ul>
       {% if pactsS %}
       {% for p in pactsS %}
@@ -100,7 +100,7 @@
   </ul>
     </div>
     <div class="column">
-      <p><strong>Pathways that {{ cellclass.name }} send to {{ hspcType }}s</strong></p>
+      <p><strong>Pathways in which {{ cellclass.name }} target {{ hspcType }}s</strong></p>
       <ul>
         {% if pactsR %}
       {% for p in pactsR %}
@@ -206,9 +206,9 @@
       }
     } else {
       if (this.getData("from") === "{{ cellclass.name }}"){
-        return this.getData("from").split("_")[0] + " sending " + this.getData("to").split("_")[0] + " to {{ hspcType }}s";
+        return this.getData("from").split("_")[0] + " " + this.getData("to").split("_")[0] + " source to {{ hspcType }}s target";
       } else {
-      return "{{ hspcType }}s sending " + this.getData("from").split("_")[0] + " to " + this.getData("to").split("_")[0];
+      return "{{ hspcType }}s " + this.getData("from").split("_")[0] + " source to " + this.getData("to").split("_")[0] + " target";
       }
     }
   });

@@ -23,7 +23,7 @@ img {
 
 <p>
     <b>H</b>ematopoiesis <b>I</b>ntercellular <b>S</b>ignaling <b>E</b>xplorer (HISE) is a database tool for exploration of intercellular communication
-    patterns of hematopoietic stem cells in the mouse bone marrow at the single cell level. To start exploring, 
+    patterns of hematopoietic stem cells in the mouse bone marrow at the single-cell level. To start exploring, 
     we provide four starting points: <b>Bone Marrow Cell Types</b>, <b>Signaling Pathways</b>, <b>Pathway Correlations</b>, and <b>Genes</b>.
 </p>
 
@@ -31,6 +31,15 @@ img {
     <p>On the Cell Types, Pathways, and Pathway Correlation pages, you will be met with a menu on the left hand side 
         prompting you to "Select HSPC Type". Selecting an HSPC will reload the page to display interaction data using 
         the selected cell (interacting %, intensity, pathway correlations, etc.).
+    </p>
+
+<h3>Selecting a Correction Factor</h3>
+    <p>On the Pathways page you will be met with a menu on the left hand side beneath the HSPC menu 
+        prompting you to select a "Cell-Cell Signaling Score Correction". Selecting an correction (default none) 
+        will reload the page to display interaction data using the selected correction (Bone marrow proportion, or bone marrow proportion and spatial interaction). 
+        These corrections come from FACS of bone marrow (bone marrow proportion) and Phenocycler measurement of spatial organization in the mouse bone marrow (spatial interaction). 
+        As these are applied to interacting cell types, this correction is only offered on the Pathways page, however, the correction factors are provided 
+        on the Cell Types page as well. 
     </p>
 
 <div class = 'row'>
@@ -79,8 +88,8 @@ img {
         </h3>
         
         <p>
-            Spearman rank correlations at the single cell level were calcualted across all cell type-pathway pairs (i.e. T-cells Receiving MHC-I).
-            Correlations were filtered such that pathways in a pair shared no functional genes.
+            Spearman rank correlations at the single cell level were calcualted across all cell type-pathway pairs 
+            (i.e. HSC source T-cells MHC-I target). Correlations were filtered such that pathways in a pair shared no functional genes.
             They were then filtered such that their adjusted p-value < 0.05. These correlations were then collapsed to pathway level correlations by 
             averaging their cell type-pathway pair correlations and taking the best adjusted p-value. Note that because correlations were calculated 
             at the cell-type-pathway level and combined after being sorted into positive and negative correlations, it is possible that the same 
@@ -101,7 +110,8 @@ img {
             from the dropdown menu takes you to a page that displays the details of the gene. These 
             details include: the corresponding ligand or receptor, the pathways it is included in, 
             a link to literature reference supporting the ligand-receptor pair and pathway, 
-            and a link to the corresponding Gene Expression Commons information page (<a href="https://gexc.riken.jp/models/3/genes" target="_blank">Gene Expression Commons</a>).
+            and a link to the corresponding Gene Expression Commons information page 
+            (<a href="https://gexc.riken.jp/models/3/genes" target="_blank">Gene Expression Commons</a>).
         </p>
         <img src="{% static "imgs/Slide8.jpg" %}" alt="colormap" style="width:90%;"/>
     </div>

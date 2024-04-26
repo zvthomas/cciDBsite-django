@@ -57,7 +57,7 @@
     <body>
         <div id="container" style="width: 100%; height: 800px; border:1px solid black;"></div>
         {% load static %} <img src="{% static "imgs/grey_colormap.png" %}" alt="colormap" style="width:100%;height:20px;"/>
-        <div class="wrapper" style="width: 100%;"><p style="text-align:center">Average Probability Score</p>
+        <div class="wrapper" style="width: 100%;"><p style="text-align:center">Average Interaction Intensity</p>
           <form name="myForm">
             <!--  <p><u>Select Cell Type to Highlight</u></p> -->
             <label>Node Stroke Color: </label>
@@ -72,8 +72,8 @@
           </form> 
       <ul>
         <li style="display:inline;">Edge Color:</li>
-        <li style="display:inline; color:#FF8181"><b> &#8212; {{ hspcType }}s Receiving</b></li>
-        <li style="display:inline; color:#8FAADC"><b> &#8212; {{ hspcType }}s Sending</b></li>
+        <li style="display:inline; color:#FF8181"><b> &#8212; {{ hspcType }}s as target</b></li>
+        <li style="display:inline; color:#8FAADC"><b> &#8212; {{ hspcType }}s as source</b></li>
       </ul></div>
       </body>
   </div>
@@ -111,7 +111,7 @@
 
   <div class = 'row'>
     <div class = "column">
-      <p><strong>Cells that receive {{ pathway.name }} from {{ hspcType }}s*</strong></p>
+      <p><strong>Cells that are targets of {{ pathway.name }} from {{ hspcType }}s*</strong></p>
       <ul>
       {% if pactsS %}
       {% for p in pactsS %}
@@ -129,7 +129,7 @@
       </ul>
     </div>
     <div class = "column">
-      <p><strong>Cells that send {{ pathway.name }} to {{ hspcType }}s*</strong></p>
+      <p><strong>Cells that are source of {{ pathway.name }} to {{ hspcType }}s*</strong></p>
       <ul>
         {% if pactsR %}
       {% for p in pactsR %}
@@ -373,7 +373,7 @@ chart.tooltip().format(function() {
       return "<span style='font-weight:bold'>{{ hspcType }}s</span>";
     }
   } else {
-    return this.getData("from").split("_")[0] + " -> " + this.getData("to").split("_")[0];
+    return this.getData("from").split("_")[0] + " source to " + this.getData("to").split("_")[0] + ' target';
   }
 });
 
