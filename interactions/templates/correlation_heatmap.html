@@ -1,0 +1,196 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% load static %}
+
+<style>
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 18px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #3071a9;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -9px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #367ebd;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #3071a9;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #2a6495;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #367ebd;
+}
+.range-wrap{
+  width: 500px;
+  position: relative;
+}
+.range-value{
+  position: absolute;
+  top: -40%;
+}
+.range-value span{
+  width: 30px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  background: #367ebd;
+  color: #fff;
+  font-size: 12px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 6px;
+  margin-top: 10px;
+}
+.range-value span:before{
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 10px solid #367ebd;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -1px;
+}
+
+.ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 7px;
+}
+.tick {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 1px;
+  background: gray;
+  
+  height: 10px;
+  line-height: 40px;
+  margin-bottom: 20px;
+}
+
+</style>
+
+
+<div style="width:90%">
+    <h1>Signaling Pathway Correlations</h1>
+    
+    <h3>How Correlations were Calculated</h3>
+    <p>
+        Spearman rank correlations at the single cell level were calcualted across all cell type-pathway pairs  (i.e. HSC source T-cells MHC-I target).
+        Correlations were filtered such that pathways in a pair shared no functional genes.
+        They were then filtered such that their adjusted p-value < 0.05. These correlations were then collapsed to pathway level correlations by 
+        averaging their cell type-pathway pair correlations and taking the best adjusted p-value. 
+        <br>
+    </p>
+    
+          <p>
+        The highest positive correlation in HSCs is between HSC CCL source and HSC PARs source (r = 0.736).
+        The highest negative correlations in HSCs is between HSC MHC-I source and HSC PARs target 
+        (r = -0.403).
+          </p>
+        <div class="row">
+          <div class="column">
+              <img src="{% static "imgs/top10_positive_corr_paths_min_pval_5per_HSC.png" %}" alt="colormap" style="width:75%;"/>
+          </div>
+    
+          <div class="column">
+              <img src="{% static "imgs/top10_negative_corr_paths_min_pval_5per_HSC.png" %}" alt="colormap" style="width:75%;"/>            
+          </div>
+      </div>
+
+<div class="row">
+
+<div style="width:33%">
+    
+</div>
+<div class="width:33%">
+  {{bar_plot|safe}}
+</div>
+<div style="width:33%">
+  
+</div>
+</div>
+
+
+
+</div>    
+
+
+
+
+{% endblock %}

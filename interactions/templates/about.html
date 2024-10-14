@@ -91,12 +91,8 @@ img {
             Spearman rank correlations at the single cell level were calcualted across all cell type-pathway pairs 
             (i.e. HSC source T-cells MHC-I target). Correlations were filtered such that pathways in a pair shared no functional genes.
             They were then filtered such that their adjusted p-value < 0.05. These correlations were then collapsed to pathway level correlations by 
-            averaging their cell type-pathway pair correlations and taking the best adjusted p-value. Note that because correlations were calculated 
-            at the cell-type-pathway level and combined after being sorted into positive and negative correlations, it is possible that the same 
-            intercellular signaling pathway correlation can be both negative and positive (see VCAM and PARs for an example). This is because Pathway 
-            A and Pathway B may be positively correlated for cell types X,Y, and Z but negatively correlated for cell types Q,R, and S.
+            averaging their cell type-pathway pair correlations and taking the best adjusted p-value.
         </p>
-        <img src="{% static "imgs/Slide6.jpg" %}" alt="colormap" style="width:90%;"/>
 
         </div>
 

@@ -58,7 +58,7 @@
         distinct populations and their intercellular communications with their microenvironment were predicted. These predictions are based on scRNA
         expression of corresponding ligands and receptors in the source and target cells, respectively. These generated thousands of 
         Pathway-Cell Type Pairs with at least 5% single-cell activity. The Pathway-Cell Type Pairs were also used to generate
-        <a href="{% url 'correlations' %}">pathway-pathway correlations</a>. These correlations were calculated using a Spearman rank correlations.
+        <a href="{% url 'correlation_heatmap' %}">pathway-pathway correlations</a>. These correlations were calculated using a Spearman rank correlations.
     </p>
 
     <div class="row">
@@ -87,7 +87,7 @@
             <li>Cell Cell Contact: {{num_ccc}}</li>
             <li>Extracellular Matrix-Receptor: {{num_ecmr}}</li>
         </ul>
-        <li><strong><a href="{% url 'correlations' %}">Pathway correlations</a>:</strong> {{ num_correlations|intcomma }} </li>
+        <li><strong><a href="{% url 'correlation_heatmap' %}">Pathway correlations</a>:</strong> {{ num_correlations|intcomma }} </li>
                 <ul>
                     <li>Positive Correlations: {{ pos_correlations }}</li>
                     <li>Negative Correlations: {{ neg_correlations }}</li>

@@ -21,7 +21,7 @@
         Using CellChat on scRNA-seq data, we calculate interaction intesnity values between HSPCs and other
         cell types. These interaction intesnity values are then adjusted by FACS, data that reveals
         cell type fraction in the bone marrow. Finally, these values are adjusted by spatial data from 
-        the Phenocycler, specifically, which cells are found within a 50 &#956;m distance from an HSPC at
+        the Phenocycler, specifically, which cells are found within a 20 &#956;m distance from an HSPC at
         rates significantly higher than random chance.
     </p>
     <p>
@@ -29,26 +29,16 @@
         strategies and therefore, at each step, the model is restricted by the cell types that are 
         identifiable with the given technologies. For example, with our current set-up, HSCs and MPPs are 
         not identifiable in Phenocycler data, but KLS (cKit+Lin-Sca+) cells are. In the network diagrams,
-        <b style="color: #FF8181; padding: 2px; border: 2px solid #FF8181; background-color: black;">RED</b> 
-        arrows denote signals in which HSPCs are targets, 
-        <b style="color: #8FAADC; padding: 2px; border: 2px solid #8FAADC; background-color: black;">BLUE</b> 
-        arrows denote signals sourced from HSPCs, and the thickness of arrows represent the strength of interaction. 
     </p>
-    <img src="{% static "imgs/cell_cell_signaling_score_calc.png" %}" alt="cell_cell_signaling_score_calc" style="width:90%;"/>
+    <img src="{% static "imgs/spatiomolecular_signaling_score_calc.png" %}" alt="spatiomolecular_signaling_score_calc" style="width:90%;"/>
     <br><br><br><br>
 
-    <h2>Interaction Intensity</h2>
-    <img src="{% static "imgs/interaction_intensity_heatmap.png" %}" alt="interaction_intensity_heatmap" style="width:90%;"/>
-    <img src="{% static "imgs/interaction_intensity_network.png" %}" alt="interaction_intensity_heatmap" style="width:90%;"/>
+    <h2>Phenocycler Imaging</h2>
+    <img src="{% static "imgs/imaging_data.png" %}" alt="imaging_data" style="width:90%;"/>
     <br><br><br><br><br><br>
-    <h2>Interaction Intensity X Cell Frequency</h2>
-    <img src="{% static "imgs/interaction_intensity_FACS_heatmap.png" %}" alt="interaction_intensity_FACS_heatmap" style="width:90%;"/>
-    <img src="{% static "imgs/interaction_intensity_FACS_network.png" %}" alt="interaction_intensity_FACS_heatmap" style="width:90%;"/>
-    <br><br><br><br><br><br>
-    <h2>Interaction Intensity X Cell Frequency X Interaction Probability</h2>
-    <img src="{% static "imgs/interaction_intensity_FACS_pheno_heatmap.png" %}" alt="interaction_intensity_FACS_pheno_heatmap" style="width:90%;"/>
-    <img src="{% static "imgs/interaction_intensity_FACS_pheno_network.png" %}" alt="interaction_intensity_FACS_pheno_heatmap" style="width:90%;"/>
-
+    <h2>Sample Calculation: KIT Pathway</h2>
+    <img src="{% static "imgs/sample_calc.png" %}" alt="sample_calc" style="width:90%;"/>
+    
 </div>
 
 

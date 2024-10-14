@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from plotly.offline import plot
-import plotly.graph_objects as go
+import plotly.graph_objs as go
 from django.shortcuts import get_object_or_404
+import plotly.express as px
 import networkx as nx
 import json
 import numpy as np
@@ -9,6 +10,8 @@ from matplotlib import cm
 import matplotlib as mpl
 from .models import Pathway, Receptor, Ligand, cellClas, pathwayAndCelltype, pathwayCorrelations
 from django.views import generic
+from django.contrib.staticfiles.storage import staticfiles_storage
+import pandas as pd
 # Create your views here.
 
 #!/usr/bin/env python3
@@ -283,6 +286,35 @@ def correlations(request):
     context = {'genemap':genemap, 'paths':paths, 'plot_div' : plot_div, 'hspcType' : hspcType.upper()}
     
     return render(request, 'correlations.html', context)
+
+
+def correlations_heatmap(request):
+
+    hspcType = getHSPCcookie(request)
+
+
+    guess = staticfiles_storage.path('download_files/' + hspcType + '_correlations_pivot.csv')
+    correlation_pivot_both = pd.read_csv(guess, index_col = 0)
+
+    # Create the plot
+    fig = go.Figure(data = go.Heatmap(z = correlation_pivot_both.values.tolist()[::-1],
+                                      x = correlation_pivot_both.columns,
+                                      y = correlation_pivot_both.columns[::-1],
+                                      colorscale = 'RdBu_r',
+                                      zmid = 0,
+                                      hovertemplate = "%{x} %{y}<br>Spearman Rank Corr: %{z}<extra></extra>"))
+    fig['layout']['xaxis']['scaleanchor']='y'
+    fig.update_layout(scene = go.layout.Scene(aspectratio = {'x':1, 'y':1}),
+                      height = 800,
+                      plot_bgcolor='rgba(0,0,0,0)')
+
+    # Embed the plot in an HTML div tag
+    bar_plot_div = plot(fig, output_type="div",)
+
+    context: dict = {'title':    'BMI Calculator',
+                 'bar_plot': bar_plot_div}
+
+    return render(request, 'correlation_heatmap.html', context)
 
 def signalingNetworkPage(request):
 

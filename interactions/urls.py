@@ -15,4 +15,5 @@ urlpatterns = [
     path('correlations/', views.correlations, name = 'correlations'),
     path('downloadLinks', views.downloadPage, name = 'downloads'),
     path('signalingNetworks', views.signalingNetworkPage, name = 'signalingNetworklink'),
+    path('correlations_heatmap/', views.correlations_heatmap, name = 'correlation_heatmap'),
 ]
