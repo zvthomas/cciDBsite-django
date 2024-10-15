@@ -22,24 +22,24 @@ img {
 <h1>About HISE</h1>
 
 <p>
-    <b>H</b>ematopoiesis <b>I</b>ntercellular <b>S</b>ignaling <b>E</b>xplorer (HISE) is a database tool for exploration of intercellular communication
+    <b>H</b>ematopoiesis <b>I</b>ntercellular <b>S</b>ignaling <b>E</b>xplorer (<b>HISE</b>) is a database tool for exploring intercellular communication
     patterns of hematopoietic stem cells in the mouse bone marrow at the single-cell level. To start exploring, 
     we provide four starting points: <b>Bone Marrow Cell Types</b>, <b>Signaling Pathways</b>, <b>Pathway Correlations</b>, and <b>Genes</b>.
 </p>
 
 <h3>Selecting an HSPC</h3>
-    <p>On the Cell Types, Pathways, and Pathway Correlation pages, you will be met with a menu on the left hand side 
+    <p>On the <i>Cell Types</i>, <i>Pathways</i>, and <i>Pathway Correlation</i> pages, you will be met with a menu on the left hand side 
         prompting you to "Select HSPC Type". Selecting an HSPC will reload the page to display interaction data using 
-        the selected cell (interacting %, intensity, pathway correlations, etc.).
+        the selected cell (interacting fraction, intensity, pathway correlations, etc.).
     </p>
 
 <h3>Selecting a Correction Factor</h3>
     <p>On the Pathways page you will be met with a menu on the left hand side beneath the HSPC menu 
-        prompting you to select a "Cell-Cell Signaling Score Correction". Selecting an correction (default none) 
+        prompting you to select a "Cell-Cell Signaling Score Correction". Selecting a correction (default none) 
         will reload the page to display interaction data using the selected correction (Bone marrow proportion, or bone marrow proportion and spatial interaction). 
-        These corrections come from FACS of bone marrow (bone marrow proportion) and Phenocycler measurement of spatial organization in the mouse bone marrow (spatial interaction). 
-        As these are applied to interacting cell types, this correction is only offered on the Pathways page, however, the correction factors are provided 
-        on the Cell Types page as well. 
+        These corrections come from flow cytometry of bone marrow (bone marrow proportion) and Phenocycler measurement of spatial organization in the mouse bone marrow (spatial interaction). 
+        As these are applied to interacting cell types, this correction is only offered on the <i>Pathways</i> page, however, the correction factors are provided 
+        on the <i>Cell Types</i> page as well. 
     </p>
 
 <div class = 'row'>
@@ -84,14 +84,16 @@ img {
 
     <div class = "column">
         <h3>
-            <a class="titleLink" href="{% url 'correlations' %}">Pathway Correlations</a>
+            <a class="titleLink" href="{% url 'correlation_heatmap' %}">Pathway Correlations</a>
         </h3>
         
         <p>
             Spearman rank correlations at the single cell level were calcualted across all cell type-pathway pairs 
             (i.e. HSC source T-cells MHC-I target). Correlations were filtered such that pathways in a pair shared no functional genes.
             They were then filtered such that their adjusted p-value < 0.05. These correlations were then collapsed to pathway level correlations by 
-            averaging their cell type-pathway pair correlations and taking the best adjusted p-value.
+            averaging their cell type-pathway pair correlations and taking the best adjusted p-value. <br><br>
+            The <i>Pathway Correlations</i> page displays a heatmap of correlations where the rows and columns are pathways 
+            and the color of the cell shows the Spearman Rank Correlation. Only significant correlations are displayed.
         </p>
 
         </div>

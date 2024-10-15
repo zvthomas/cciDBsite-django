@@ -57,7 +57,7 @@
     <body>
         <div id="container" style="width: 100%; height: 800px; border:1px solid black;"></div>
         {% load static %} <img src="{% static "imgs/grey_colormap.png" %}" alt="colormap" style="width:100%;height:20px;"/>
-        <div class="wrapper" style="width: 100%;"><p style="text-align:center">Average Interaction Intensity</p>
+        <div class="wrapper" style="width: 100%;"><p style="text-align:center">Average Signaling Potential</p>
           <form name="myForm">
             <!--  <p><u>Select Cell Type to Highlight</u></p> -->
             <label>Node Stroke Color: </label>
@@ -97,10 +97,10 @@
   </p>
   <p><strong>Graph Terms:</strong>
     <ul>
-      <li><strong>Average Interaction Intensity: </strong>Score given to cell-type pathway pair that describes the intensity of the potential interaction. This score is based on ligand/receptor gene expression levels.</li>
+      <li><strong>Average Signaling Potential: </strong>Score given to cell-type pathway pair that describes the intensity of the potential interaction. This score is based on ligand/receptor gene expression levels.</li>
       <li><strong>{{ hspcType }} Percent: </strong>Proportion of {{ hspcType }}s that interact with the given cell type in the {{ pathway.name }} pathway.</li>
       <li><strong>Node Size: </strong>Node size refelcts percent of {{ hspcType }}s interacting</li>
-      <li><strong>Node Color: </strong>Node color reflects Average Interaction Intensity</li>
+      <li><strong>Node Color: </strong>Node color reflects Average Signaling Potential</li>
     </ul>
   </p>
 
@@ -366,7 +366,7 @@ chart.interactivity().hoverGap(30);
 chart.tooltip().format(function() {
   if (this.type == "node") {
     if (this.id != "{{ hspcType }}s"){
-      return "<span style='font-weight:bold'>" + this.id.split("_")[0] + "</span><br>Average Interaction Intensity: " + this.getData("Average_Score") + 
+      return "<span style='font-weight:bold'>" + this.id.split("_")[0] + "</span><br>Average Signaling<br>Potential: " + this.getData("Average_Score") + 
       "<br>{{ hspcType }} Percent: " + this.getData("HSC_Percent")
     }
     else {

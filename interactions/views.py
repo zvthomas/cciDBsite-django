@@ -296,12 +296,18 @@ def correlations_heatmap(request):
     guess = staticfiles_storage.path('download_files/' + hspcType + '_correlations_pivot.csv')
     correlation_pivot_both = pd.read_csv(guess, index_col = 0)
 
+    correlation_pivot_both_values = correlation_pivot_both.values.tolist()
+    for i in range(len(correlation_pivot_both_values)):
+        correlation_pivot_both_values[i][i] = None
+
     # Create the plot
-    fig = go.Figure(data = go.Heatmap(z = correlation_pivot_both.values.tolist()[::-1],
+    fig = go.Figure(data = go.Heatmap(z = correlation_pivot_both_values[::-1],
                                       x = correlation_pivot_both.columns,
                                       y = correlation_pivot_both.columns[::-1],
                                       colorscale = 'RdBu_r',
                                       zmid = 0,
+                                      xgap = 1,
+                                      ygap = 1,
                                       hovertemplate = "%{x} %{y}<br>Spearman Rank Corr: %{z}<extra></extra>"))
     fig['layout']['xaxis']['scaleanchor']='y'
     fig.update_layout(scene = go.layout.Scene(aspectratio = {'x':1, 'y':1}),
@@ -311,8 +317,18 @@ def correlations_heatmap(request):
     # Embed the plot in an HTML div tag
     bar_plot_div = plot(fig, output_type="div",)
 
-    context: dict = {'title':    'BMI Calculator',
-                 'bar_plot': bar_plot_div}
+    
+    
+
+    max_coords = correlation_pivot_both.stack().idxmax()
+    min_coords = correlation_pivot_both.stack().idxmin()
+
+    max_sentence = max_coords[0] + " and " + max_coords[1]
+    min_sentence = min_coords[0] + " and " + min_coords[1]
+
+    context: dict = {'bar_plot': bar_plot_div,
+                     'max_sentence':max_sentence,
+                     'min_sentence':min_sentence}
 
     return render(request, 'correlation_heatmap.html', context)
 

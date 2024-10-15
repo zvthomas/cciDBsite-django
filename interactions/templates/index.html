@@ -38,7 +38,7 @@
 <div style="width:90%">
     <h1><b>H</b>ematopoiesis <b>I</b>ntercellular <b>S</b>ignaling <b>E</b>xplorer (HISE)</h1>
     <p>
-        Welcome to HISE, a webiste developed by the <a href="https://ronglulab.usc.edu/" target="_blank"><b><em>Lu Lab at USC</em></b></a>, to display putative interactions between hematopoietic stem and progenitor cells
+        Welcome to HISE, a webiste developed by the <a href="https://ronglulab.usc.edu/" target="_blank"><b><em>Lu Lab at USC</em></b></a> to display putative interactions between hematopoietic stem and progenitor cells
         and their microenvironment at the single-cell level! We provide a few starting points in the left menu, or continue on this page to read more 
         about the data used and how predictions were made.</p>
     <div class="row">
@@ -52,13 +52,16 @@
 
     </div>
 <br>
-<h2>Intercellular Siganling Predictions</h2>
+<h2>Intercellular Signaling Predictions</h2>
     <p>
         Using CellChat (<a href="https://www.nature.com/articles/s41467-021-21246-9" target="_blank">Jin, et. al</a>), individual HSPCs were treated as
         distinct populations and their intercellular communications with their microenvironment were predicted. These predictions are based on scRNA
         expression of corresponding ligands and receptors in the source and target cells, respectively. These generated thousands of 
         Pathway-Cell Type Pairs with at least 5% single-cell activity. The Pathway-Cell Type Pairs were also used to generate
-        <a href="{% url 'correlation_heatmap' %}">pathway-pathway correlations</a>. These correlations were calculated using a Spearman rank correlations.
+        <a href="{% url 'correlation_heatmap' %}">pathway-pathway correlations</a>. These correlations were calculated using Spearman rank correlations. 
+        <br><br>
+        This calculation however does not include any spatial or cell type frequency information. See <a href="{% url 'signalingNetworklink' %}">Signaling Networks</a> for more information.
+        <br><br>
     </p>
 
     <div class="row">
