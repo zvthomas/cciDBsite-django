@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from plotly.offline import plot
 import plotly.graph_objs as go
+from plotly.subplots import make_subplots
 from django.shortcuts import get_object_or_404
 import plotly.express as px
 import networkx as nx
 import json
+import pickle
 import numpy as np
 from matplotlib import cm
 import matplotlib as mpl
@@ -32,6 +34,25 @@ MEP_spatial_pvalue = {'B cell':0.9, 'EC-Arterial':0.998, 'EC-Sinusoidal':0.991, 
 GMP_spatial_pvalue = {'B cell':0.921, 'EC-Arterial':0.998, 'EC-Sinusoidal':0.898, 'MSPC-Osteo':1, 'MSPC-Adipo':1, 'T cells':0.529, 'GMP':1, 'MEP':0.999, 'Monocytes':1, 'HSC':1, 'MPP':1}
 pheno_dicts = {'hsc':KLS_spatial_pvalue, 'mpp':KLS_spatial_pvalue,
                'mep':MEP_spatial_pvalue, 'gmp':GMP_spatial_pvalue}
+
+
+r_pickle_path = staticfiles_storage.path("all_pathways/receiving_pathways_dictionary_db.pkl")
+s_pickle_path = staticfiles_storage.path("all_pathways/sending_pathways_dictionary_db.pkl")
+r_pickle_celltype = staticfiles_storage.path("all_pathways/receiving_celltypes_dictionary_db.pkl")
+s_pickle_celltype = staticfiles_storage.path("all_pathways/sending_celltypes_dictionary_db.pkl")
+
+with open(r_pickle_path, 'rb') as handle:
+    receiving_pathways_dictionary_db = pickle.load(handle)
+
+with open(s_pickle_path, 'rb') as handle:
+    sending_pathways_dictionary_db = pickle.load(handle)
+
+with open(r_pickle_celltype, 'rb') as handle:
+    receiving_celltypes_dictionary_db = pickle.load(handle)
+
+with open(s_pickle_celltype, 'rb') as handle:
+    sending_celltypes_dictionary_db = pickle.load(handle)
+
 
 import math
 from typing import List
@@ -287,11 +308,94 @@ def correlations(request):
     
     return render(request, 'correlations.html', context)
 
+def process_csv(filename):
+    pp = pd.read_csv(filename, header  = 0)
+    pp = pp.set_index('Unnamed: 0')
+    pp.index.names = [None]
+    return pp
+
+def get_specific_interaction(parent_path, cell_type, sorr):
+    
+    nbc = ["Chondrocytes","EC-Arteriar","EC-Arteriolar","EC-Sinusoidal",
+                        "Fibroblasts","MSPC-Adipo","MSPC-Osteo","Myofibroblasts","Osteo",
+                        "Osteoblasts","Pericytes","Schwann-cells","Smooth-muscle", 
+                       'CLP', 'lin-', 'MEP', 'CMP', 'GMP', 'MPP', 'HSC', 'B cell', 'Dendritic cells',
+                        'Eo/Baso prog.', 'Ery prog.', 'Ery/Mk prog.', 'Erythroblasts', 'Gran/Mono prog.',
+                        'LMPPs', 'Mk prog.', 'Mono prog.', 'Monocytes', 'NK cells', 'Neutro prog.', 'Neutrophils',
+                        'T cells', 'large pre-B.', 'pro-B', 'small pre-B.']
+    
+    if sorr == 's':
+        filename = 'singleCell_to_' + cell_type
+    else:
+        filename = cell_type + "_to_singleCell"
+    
+    interaction_df = process_csv(parent_path + "/" +  filename + '.csv')
+    
+    interaction_df = interaction_df.T
+    interaction_df = interaction_df.drop(columns=nbc)
+    
+    return interaction_df.T
+
+def pathway_vector(hspc, pathway, direction):
+        
+    parent_path = staticfiles_storage.path("all_pathways/all_pathways_" + hspc + "/")
+    
+    heat_vector = []
+    
+    
+    file_names = [
+                  "Chondrocytes", "ECArteriar", "ECArteriolar", "ECSinusoidal","Fibroblasts",
+                  "MSPCAdipo", "MSPCOsteo", "Myofibroblasts", "Osteo", "Osteoblasts",
+                  "Pericytes", "Schwanncells", "Smoothmuscle",
+                  "CLP","lin","MEP","CMP","GMP","MPP","HSC",
+                  "B cell","Dendritic cells",
+                  "EoBaso prog","Ery prog","EryMk prog","Erythroblasts","GranMono prog",
+                  "LMPPs","Mk prog","Mono prog","Monocytes","NK cells","Neutro prog",
+                  
+                  "Neutrophils","T cells","large preB","proB","small preB"
+                 ]
+    
+    for i in file_names:
+        t = get_specific_interaction(parent_path, i, direction)
+        if pathway in t.columns:
+            heat_vector.append(t[pathway].sum())
+        else:
+            heat_vector.append(0)
+    return heat_vector
+
+
+
+def hspc_heatmap(pathway, direction, hspcs = ['hsc', 'mpp', 'clp', 'cmp', 'gmp', 'mep']):
+    
+    file_names = [
+                  "Chondrocytes", "ECArteriar", "ECArteriolar", "ECSinusoidal","Fibroblasts",
+                  "MSPCAdipo", "MSPCOsteo", "Myofibroblasts", "Osteo", "Osteoblasts",
+                  "Pericytes", "Schwanncells", "Smoothmuscle",
+                  "CLP","lin","MEP","CMP","GMP","MPP","HSC",
+                  "B cell","Dendritic cells",
+                  "EoBaso prog","Ery prog","EryMk prog","Erythroblasts","GranMono prog",
+                  "LMPPs","Mk prog","Mono prog","Monocytes","NK cells","Neutro prog",
+                  
+                  "Neutrophils","T cells","large preB","proB","small preB"
+                 ]
+    
+    heat_mat = []
+    
+    for hspc in hspcs:
+        heat_mat.append(pathway_vector(hspc, pathway, direction))
+    
+    df = pd.DataFrame(heat_mat,columns = file_names)
+    df.index = ['HSC', 'MPP', 'CLP', 'CMP', 'GMP', 'MEP']
+    df = df.T
+    
+    df = df/(df.max().max())
+    
+    return df
+
 
 def correlations_heatmap(request):
 
     hspcType = getHSPCcookie(request)
-
 
     guess = staticfiles_storage.path('download_files/' + hspcType + '_correlations_pivot.csv')
     correlation_pivot_both = pd.read_csv(guess, index_col = 0)
@@ -306,8 +410,8 @@ def correlations_heatmap(request):
                                       y = correlation_pivot_both.columns[::-1],
                                       colorscale = 'RdBu_r',
                                       zmid = 0,
-                                      xgap = 1,
-                                      ygap = 1,
+                                      xgap = 0.5,
+                                      ygap = 0.5,
                                       hovertemplate = "%{x} %{y}<br>Spearman Rank Corr: %{z}<extra></extra>"))
     fig['layout']['xaxis']['scaleanchor']='y'
     fig.update_layout(scene = go.layout.Scene(aspectratio = {'x':1, 'y':1}),
@@ -315,10 +419,7 @@ def correlations_heatmap(request):
                       plot_bgcolor='rgba(0,0,0,0)')
 
     # Embed the plot in an HTML div tag
-    bar_plot_div = plot(fig, output_type="div",)
-
-    
-    
+    heatmap_div = plot(fig, output_type="div",)
 
     max_coords = correlation_pivot_both.stack().idxmax()
     min_coords = correlation_pivot_both.stack().idxmin()
@@ -326,7 +427,7 @@ def correlations_heatmap(request):
     max_sentence = max_coords[0] + " and " + max_coords[1]
     min_sentence = min_coords[0] + " and " + min_coords[1]
 
-    context: dict = {'bar_plot': bar_plot_div,
+    context: dict = {'bar_plot': heatmap_div,
                      'max_sentence':max_sentence,
                      'min_sentence':min_sentence}
 
@@ -364,13 +465,44 @@ class PathwayDetailView(generic.DetailView):
         ligands = pathway.ligands.all()
         receptors = pathway.receptors.all()
 
+        rDF = receiving_pathways_dictionary_db[pathway.name]
+        sDF = sending_pathways_dictionary_db[pathway.name]
+
+        fig_total = make_subplots(rows = 1, cols = 2,
+                                  subplot_titles = ("HSPCs Receiving Signals (population)", "HSPCs Sending Signals (population)"),
+                                  
+                                  horizontal_spacing=0.5)
+
+        fig_total.add_trace(go.Heatmap(z = rDF,
+                                      x = rDF.columns,
+                                      y = rDF.index,
+                                      colorscale = 'Reds',
+                                      zmid = 0.5,
+                                      xgap = 1,
+                                      ygap = 1,
+                                      hovertemplate = "%{y}→%{x}<br>Normalized Interaction Potential: %{z}<extra></extra>",
+                                      colorbar_x=0.25),
+                                      row = 1, col = 1)
+        #rheatmap_div = plot(rfig, output_type="div",)
+        fig_total.add_trace(go.Heatmap(z = sDF,
+                                      x = sDF.columns,
+                                      y = sDF.index,
+                                      colorscale = 'Blues',
+                                      zmid = 0.5,
+                                      xgap = 1,
+                                      ygap = 1,
+                                      hovertemplate = "%{y}←%{x}<br>Normalized Interaction Potential: %{z}<extra></extra>"),
+                                      row = 1, col = 2)
+        #sheatmap_div = plot(sfig, output_type="div",)
+        fig_total = plot(fig_total, output_type="div",)
         if len(pactsS) > 0 or len(pactsR) > 0:
             plot_div = make_net_graph_JSON(pactsS, pactsR, hspcType, 'cts',correction)
             #plot_div = make_net_graph_spread(pactsS, pactsR, 'cts')
             context = {'pathway': pathway, 'pactsS': pactsS, 'pactsR': pactsR,
                         'plot_div': plot_div, 'ligands':ligands, 'receptors': receptors,
                         'pmids' : pmids, 'keggs' : keggs, 'pmcs' : pmcs,
-                        'correlations1' : correlatedPathways1, 'correlations2' : correlatedPathways2, 'hspcType' : hspcType.upper()}
+                        'correlations1' : correlatedPathways1, 'correlations2' : correlatedPathways2, 'hspcType' : hspcType.upper(),
+                        'rheatmap_div':fig_total, 'sheatmap_div':fig_total}
             return render(request, 'interactions/pathway_detail.html', context)
         
         else:
@@ -402,11 +534,50 @@ class CellClassDetailView(generic.DetailView):
 
         pactsS = pathwayAndCelltype.objects.filter(celltype= cellclass, sorr = 's', hscPercent__range=(0.05,2), hspc_type = hspcType)
         pactsR = pathwayAndCelltype.objects.filter(celltype= cellclass, sorr = 't', hscPercent__range=(0.05,2), hspc_type = hspcType)
+
+        receiving_celltypes_dictionary_db
+
+        celltype_name = cellclass.name
+        if celltype_name == 'Osteoclasts':
+            celltype_name = 'Osteo'
+
+        rDF = receiving_celltypes_dictionary_db[celltype_name]
+        sDF = sending_celltypes_dictionary_db[celltype_name]
+
+        fig_total = make_subplots(rows = 1, cols = 2,
+                                  subplot_titles = ("HSPCs Receiving Signals (population)", "HSPCs Sending Signals (population)"),
+                                  
+                                  horizontal_spacing=0.5)
+
+        fig_total.add_trace(go.Heatmap(z = rDF,
+                                      x = rDF.columns,
+                                      y = rDF.index,
+                                      colorscale = 'Reds',
+                                      zmid = 0.5,
+                                      xgap = 1,
+                                      ygap = 1,
+                                      hovertemplate = "%{y}→%{x}<br>Normalized Interaction Potential: %{z}<extra></extra>",
+                                      colorbar_x=0.25),
+                                      row = 1, col = 1)
+        #rheatmap_div = plot(rfig, output_type="div",)
+        fig_total.add_trace(go.Heatmap(z = sDF,
+                                      x = sDF.columns,
+                                      y = sDF.index,
+                                      colorscale = 'Blues',
+                                      zmid = 0.5,
+                                      xgap = 1,
+                                      ygap = 1,
+                                      hovertemplate = "%{y}←%{x}<br>Normalized Interaction Potential: %{z}<extra></extra>"),
+                                      row = 1, col = 2)
+        #sheatmap_div = plot(sfig, output_type="div",)
+        fig_total = plot(fig_total, output_type="div",)
+
         if len(pactsS) > 0 or len(pactsR) >0:
             plot_div = make_net_graph_JSON(pactsS, pactsR, hspcType, 'paths')
             #plot_div = make_net_graph_spread(pactsS, pactsR, 'paths')
             context = {'cellclass': cellclass, 'pactsS': pactsS, 'pactsR': pactsR,
-                        'plot_div': plot_div, 'hspcType' : hspcType.upper(), 'cellTypeProp': ctp, 'phenoPvalue': phenoMeasurement}
+                        'plot_div': plot_div, 'hspcType' : hspcType.upper(), 'cellTypeProp': ctp, 'phenoPvalue': phenoMeasurement,
+                        'rheatmap_div':fig_total, 'sheatmap_div':fig_total}
             return render(request, 'interactions/cellclas_detail.html', context)
         
         else:

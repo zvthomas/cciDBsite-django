@@ -100,12 +100,12 @@ def run():
     for HSPC_TYPE in ['hsc', 'clp', 'cmp', 'gmp', 'mep', 'mpp']:
 
         if HSPC_TYPE == 'hsc':
-            path_path = "P:/zthomas/Intercellular Interactions Project/cluster_analysis/general_niche/all_pathways/"
+            path_path = "P:/zthomas/Intercellular Interactions Project/cluster_analysis/general_niche_hscMetacell/all_pathways/"
         else:
-            path_path = "P:/zthomas/Intercellular Interactions Project/cluster_analysis/general_niche_" + HSPC_TYPE + "/all_pathways/"
+            path_path = "P:/zthomas/Intercellular Interactions Project/cluster_analysis/general_niche_" + HSPC_TYPE + "Metacell/all_pathways/"
 
-        filepathS_names = [path_path + 'hsc_to_' + f + ".csv" for f in file_names]
-        filepathR_names = [path_path + f + "_to_hsc.csv" for f in file_names]
+        filepathS_names = [path_path + 'singleCell_to_' + f + ".csv" for f in file_names]
+        filepathR_names = [path_path + f + "_to_singleCell.csv" for f in file_names]
         signal_code = {'Cell-Cell Contact':'c','Secreted Signaling':'s',"ECM-Receptor":'e'}
         
         for signal_type in ['Cell-Cell Contact','Secreted Signaling',"ECM-Receptor"]:
@@ -224,6 +224,9 @@ def run():
     #                                            celltype = ,
     #                                            hscPercent = ,
     #                                            sorr = )
+    
+    
+    
     for HSPC_TYPE in ['hsc', 'clp', 'cmp', 'gmp', 'mep', 'mpp']:
 
         pos_correlations = pd.read_csv("P:/zthomas/Intercellular Interactions Project/cluster_analysis/pathway_correlations/pos_correlations_hide_" + HSPC_TYPE + ".csv")
@@ -253,3 +256,5 @@ def run():
                                                             correlation = corr,
                                                             pval = pval,
                                                             hspc_type = HSPC_TYPE)
+
+    

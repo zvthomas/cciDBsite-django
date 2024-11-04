@@ -76,7 +76,8 @@
 </div>
 
 </div>
-  
+      <hr>
+  <p>*Pathways are filtered such that at least 5% of {{ hspcType }}s are active.</p>
     <hr>
 
 
@@ -117,11 +118,17 @@
       {% endif %}
       </ul>
     </div>
-    <hr>
-  <p>*Pathways are filtered such that at least 5% of {{ hspcType }}s are active.</p>
+
   </div>
   
 <br>
+
+<div class="row" style="width:90%">
+
+  {{rheatmap_div|safe}}
+  {{sheatmap_div|safe}}
+
+</div>
 
 <br>
 
