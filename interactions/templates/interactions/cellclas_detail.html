@@ -81,45 +81,7 @@
     <hr>
 
 
-  <div class="row">
-    <div class="column">
-       <p><strong>Pathways in which {{ hspcType }} source {{ cellclass.name }}s</strong></p>
-      <ul>
-      {% if pactsS %}
-      {% for p in pactsS %}
-        {% if p.pathway.interaction_type == 's' %}
-          <li style="color:#056E5D"><a class="ohboi" style="color:#056E5D" href="{{ p.pathway.get_absolute_url }}">{{ p.pathway.name }}</a></li>
-        {% elif p.pathway.interaction_type == 'c'%}
-          <li style="color:#7905D7"><a class="ohboi" style="color:#7905D7" href="{{ p.pathway.get_absolute_url }}">{{ p.pathway.name }}</a></li>
-        {% else %}
-          <li style="color:#202A25"><a class="ohboi" style="color:#202A25" href="{{ p.pathway.get_absolute_url }}">{{ p.pathway.name }}</a></li>
-        {% endif %}
-      {% endfor %}
-      {% else %}
-      No pathways
-      {% endif %}
-  </ul>
-    </div>
-    <div class="column">
-      <p><strong>Pathways in which {{ cellclass.name }} target {{ hspcType }}s</strong></p>
-      <ul>
-        {% if pactsR %}
-      {% for p in pactsR %}
-        {% if p.pathway.interaction_type == 's' %}
-          <li style="color:#056E5D"><a class="ohboi" style="color:#056E5D" href="{{ p.pathway.get_absolute_url }}">{{ p.pathway.name }}</a></li>
-        {% elif p.pathway.interaction_type == 'c'%}
-          <li style="color:#7905D7"><a class="ohboi" style="color:#7905D7" href="{{ p.pathway.get_absolute_url }}">{{ p.pathway.name }}</a></li>
-        {% else %}
-          <li style="color:#202A25"><a class="ohboi" style="color:#202A25" href="{{ p.pathway.get_absolute_url }}">{{ p.pathway.name }}</a></li>
-        {% endif %}
-      {% endfor %}
-      {% else %}
-      No pathways
-      {% endif %}
-      </ul>
-    </div>
 
-  </div>
   
 <br>
 
@@ -127,6 +89,46 @@
 
   {{rheatmap_div|safe}}
   {{sheatmap_div|safe}}
+
+</div>
+
+<div class="row">
+  <div class="column">
+     <p><strong>Pathways in which {{ hspcType }} source {{ cellclass.name }}s</strong></p>
+    <ul>
+    {% if pactsS %}
+    {% for p in pactsS %}
+      {% if p.pathway.interaction_type == 's' %}
+        <li style="color:#056E5D"><a class="ohboi" style="color:#056E5D" href="{{ p.pathway.get_absolute_url }}">{{ p.pathway.name }}</a></li>
+      {% elif p.pathway.interaction_type == 'c'%}
+        <li style="color:#7905D7"><a class="ohboi" style="color:#7905D7" href="{{ p.pathway.get_absolute_url }}">{{ p.pathway.name }}</a></li>
+      {% else %}
+        <li style="color:#202A25"><a class="ohboi" style="color:#202A25" href="{{ p.pathway.get_absolute_url }}">{{ p.pathway.name }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% else %}
+    No pathways
+    {% endif %}
+</ul>
+  </div>
+  <div class="column">
+    <p><strong>Pathways in which {{ cellclass.name }} target {{ hspcType }}s</strong></p>
+    <ul>
+      {% if pactsR %}
+    {% for p in pactsR %}
+      {% if p.pathway.interaction_type == 's' %}
+        <li style="color:#056E5D"><a class="ohboi" style="color:#056E5D" href="{{ p.pathway.get_absolute_url }}">{{ p.pathway.name }}</a></li>
+      {% elif p.pathway.interaction_type == 'c'%}
+        <li style="color:#7905D7"><a class="ohboi" style="color:#7905D7" href="{{ p.pathway.get_absolute_url }}">{{ p.pathway.name }}</a></li>
+      {% else %}
+        <li style="color:#202A25"><a class="ohboi" style="color:#202A25" href="{{ p.pathway.get_absolute_url }}">{{ p.pathway.name }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% else %}
+    No pathways
+    {% endif %}
+    </ul>
+  </div>
 
 </div>
 

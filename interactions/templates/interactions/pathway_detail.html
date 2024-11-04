@@ -108,67 +108,7 @@
 
 </div>
 <hr>
-<p>*Pathways are filtered such that at least 5% of {{ hspcType }}s are active.</p>
-  <hr>
 
-  <div class = 'row'>
-    <div class = "column">
-      <p><strong>Cells that are targets of {{ pathway.name }} from {{ hspcType }}s*</strong></p>
-      <ul>
-      {% if pactsS %}
-      {% for p in pactsS %}
-        {% if p.celltype.cell_type == 'n' %}
-          <li style="color:#D12626"><a class="ohboi" style="color:#D12626" href="{{ p.celltype.get_absolute_url }}">{{ p.celltype.name }}</a></li>
-        {% elif p.celltype.cell_type == 'i'%}
-          <li style="color:#51C206"><a class="ohboi" style="color:#51C206" href="{{ p.celltype.get_absolute_url }}">{{ p.celltype.name }}</a></li>
-        {% else %}
-          <li style="color:#0855CA"><a class="ohboi" style="color:#0855CA" href="{{ p.celltype.get_absolute_url }}">{{ p.celltype.name }}</a></li>
-        {% endif %}
-      {% endfor %}
-      {% else %}
-          No cell populations
-      {% endif %}
-      </ul>
-    </div>
-    <div class = "column">
-      <p><strong>Cells that are source of {{ pathway.name }} to {{ hspcType }}s*</strong></p>
-      <ul>
-        {% if pactsR %}
-      {% for p in pactsR %}
-        {% if p.celltype.cell_type == 'n' %}
-          <li style="color:#D12626"><a class="ohboi" style="color:#D12626" href="{{ p.celltype.get_absolute_url }}">{{ p.celltype.name }}</a></li>
-        {% elif p.celltype.cell_type == 'i'%}
-          <li style="color:#51C206"><a class="ohboi" style="color:#51C206" href="{{ p.celltype.get_absolute_url }}">{{ p.celltype.name }}</a></li>
-        {% else %}
-          <li style="color:#0855CA"><a class="ohboi" style="color:#0855CA" href="{{ p.celltype.get_absolute_url }}">{{ p.celltype.name }}</a></li>
-        {% endif %}
-      {% endfor %}
-      {% else %}
-      No cell populations
-      {% endif %} 
-      </ul>
-    </div>
-  </div>
-  
-<div class = 'row'>
-    <div class = "column">
-    <p>Ligands:</p>
-    <ul>
-      {% for ligand in ligands %}
-      <li><a href="{{ ligand.get_absolute_url }}">{{ ligand.name }}</a></li>
-      {% endfor %}
-    </ul>
-    </div>
-  <div class = "column">
-  <p>Receptors:</p>
-  <ul>
-    {% for receptor in receptors %}
-    <li><a href="{{ receptor.get_absolute_url }}">{{ receptor.name }}</a></li>
-    {% endfor %}
-  </ul>
-  </div>
-  </div>
-<hr>
 
 <div class="row" style="width:90%">
 
@@ -212,6 +152,63 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
+
+<div class = 'row'>
+  <div class = "column">
+    <p><strong>Cells that are targets of {{ pathway.name }} from {{ hspcType }}s*</strong></p>
+    <ul>
+    {% if pactsS %}
+    {% for p in pactsS %}
+      {% if p.celltype.cell_type == 'n' %}
+        <li style="color:#D12626"><a class="ohboi" style="color:#D12626" href="{{ p.celltype.get_absolute_url }}">{{ p.celltype.name }}</a></li>
+      {% elif p.celltype.cell_type == 'i'%}
+        <li style="color:#51C206"><a class="ohboi" style="color:#51C206" href="{{ p.celltype.get_absolute_url }}">{{ p.celltype.name }}</a></li>
+      {% else %}
+        <li style="color:#0855CA"><a class="ohboi" style="color:#0855CA" href="{{ p.celltype.get_absolute_url }}">{{ p.celltype.name }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% else %}
+        No cell populations
+    {% endif %}
+    </ul>
+  </div>
+  <div class = "column">
+    <p><strong>Cells that are source of {{ pathway.name }} to {{ hspcType }}s*</strong></p>
+    <ul>
+      {% if pactsR %}
+    {% for p in pactsR %}
+      {% if p.celltype.cell_type == 'n' %}
+        <li style="color:#D12626"><a class="ohboi" style="color:#D12626" href="{{ p.celltype.get_absolute_url }}">{{ p.celltype.name }}</a></li>
+      {% elif p.celltype.cell_type == 'i'%}
+        <li style="color:#51C206"><a class="ohboi" style="color:#51C206" href="{{ p.celltype.get_absolute_url }}">{{ p.celltype.name }}</a></li>
+      {% else %}
+        <li style="color:#0855CA"><a class="ohboi" style="color:#0855CA" href="{{ p.celltype.get_absolute_url }}">{{ p.celltype.name }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% else %}
+    No cell populations
+    {% endif %} 
+    </ul>
+  </div>
+</div>
+<div class = 'row'>
+  <div class = "column">
+  <p>Ligands:</p>
+  <ul>
+    {% for ligand in ligands %}
+    <li><a href="{{ ligand.get_absolute_url }}">{{ ligand.name }}</a></li>
+    {% endfor %}
+  </ul>
+  </div>
+<div class = "column">
+<p>Receptors:</p>
+<ul>
+  {% for receptor in receptors %}
+  <li><a href="{{ receptor.get_absolute_url }}">{{ receptor.name }}</a></li>
+  {% endfor %}
+</ul>
+</div>
 </div>
 <hr>
 
