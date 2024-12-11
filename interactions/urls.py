@@ -16,4 +16,5 @@ urlpatterns = [
     path('downloadLinks', views.downloadPage, name = 'downloads'),
     path('signalingNetworks', views.signalingNetworkPage, name = 'signalingNetworklink'),
     path('correlations_heatmap/', views.correlations_heatmap, name = 'correlation_heatmap'),
+    path('correlation_scatter/<pos_neg>', views.plot_correlation_scatter, name = 'correlation_scatter'),
 ]

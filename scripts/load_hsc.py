@@ -199,38 +199,12 @@ def run():
         receptor.save()
         ligand.save()
 
-
-
-    #for row in NZFA_S.index:
-    #    for col in NZFA_S.columns:
-    #        print(row + "-" + col)
-    
-    #Pathway.objects.all().delete()
-    #cellClas.objects.all().delete()
-    #pathwayAndCelltype.objects.all().delete()
-
-    #pathway = Pathway.objects.get_or_create(name=,
-    #                   interaction_type=,po
-    #                   hscPercent=,)
-    #pathway.save()
-
-    #cell_type = (n(iche), i(mmune), p(rogenitors))
-    #cellClass = cellClas(name = ,
-    #                       sendingPathways = ,
-    #                       receivingPathways = ,
-    #                       cell_type = ,)
-
-    #cell_type_pathway_pair = pathwayAndCelltype(pathway = ,
-    #                                            celltype = ,
-    #                                            hscPercent = ,
-    #                                            sorr = )
-    
     
     
     for HSPC_TYPE in ['hsc', 'clp', 'cmp', 'gmp', 'mep', 'mpp']:
 
-        pos_correlations = pd.read_csv("P:/zthomas/Intercellular Interactions Project/cluster_analysis/pathway_correlations/pos_correlations_hide_" + HSPC_TYPE + ".csv")
-        neg_correlations = pd.read_csv("P:/zthomas/Intercellular Interactions Project/cluster_analysis/pathway_correlations/neg_correlations_hide_" + HSPC_TYPE + ".csv")
+        pos_correlations = pd.read_csv("P:/zthomas/Intercellular Interactions Project/cluster_analysis/pathway_correlations/" + HSPC_TYPE + "Metacell_meanpos_corr.csv")
+        neg_correlations = pd.read_csv("P:/zthomas/Intercellular Interactions Project/cluster_analysis/pathway_correlations/" + HSPC_TYPE + "Metacell_meanneg_corr.csv")
         
         # change send and receive to source and target
         name_change = {'s':'s', 'r':'t'}
@@ -238,10 +212,10 @@ def run():
                 for row in i.index:
                     cor = i.loc[row,]
 
-                    p1 = cor['node1'].split()[1:][0]
-                    p1a = name_change[cor['node1'].split()[0][0]]
-                    p2 = cor['node2'].split()[1:][0]
-                    p2a = name_change[cor['node2'].split()[0][0]]
+                    p1 = cor['Pathway 1'].split()[1:][0]
+                    p1a = name_change[cor['Pathway 1'].split()[0][0]]
+                    p2 = cor['Pathway 2'].split()[1:][0]
+                    p2a = name_change[cor['Pathway 2'].split()[0][0]]
 
                     corr = cor['Correlation']
                     pval = cor['Adj. P-val']

@@ -129,6 +129,7 @@
       <th>Pathway Category</th>
       <th data-type="number">Correlation Score</th>
       <th data-type="number">-log10(adj. p-value)</th>
+      <th> Plot </th>
    </tr>
   </thead>
   <tbody>
@@ -139,7 +140,12 @@
       <td>{{pathwayCorr.pathway2.get_interaction_type_display}}</td>  
       <td class="corr">{{pathwayCorr.correlation | floatformat:"4"}}</td>
       <td class="pval">{{pathwayCorr.pval}}</td>
-    </tr>
+      {% if pathwayCorr.correlation > 0 %}
+        <td><a target="_blank" href="{% url 'correlation_scatter' pos_neg='positive' %}?correlation_name={{ pathwayCorr.get_p1a_display }} {{ pathwayCorr.pathway1.name }} {{ pathwayCorr.get_p2a_display }} {{ pathwayCorr.pathway2.name }}">Scatter Plot</a></td>
+      {% else %}
+        <td><a target="_blank" href="{% url 'correlation_scatter' pos_neg='negative' %}?correlation_name={{ pathwayCorr.get_p1a_display }} {{ pathwayCorr.pathway1.name }} {{ pathwayCorr.get_p2a_display }} {{ pathwayCorr.pathway2.name }}">Scatter Plot</a></td>
+      {% endif %}
+      </tr>
     {% endfor %}
     {% for pathwayCorr in correlations2 %}
     <tr>
@@ -148,6 +154,11 @@
       <td>{{pathwayCorr.pathway1.get_interaction_type_display}}</td>  
       <td class="corr">{{pathwayCorr.correlation | floatformat:"4"}}</td>
       <td class="pval">{{pathwayCorr.pval}}</td>
+      {% if pathwayCorr.correlation > 0 %}
+        <td><a target="_blank" href="{% url 'correlation_scatter' pos_neg='positive' %}?correlation_name={{ pathwayCorr.get_p2a_display }} {{ pathwayCorr.pathway2.name }} {{ pathwayCorr.get_p1a_display }} {{ pathwayCorr.pathway1.name }}">Scatter Plot</a></td>
+      {% else %}
+        <td><a target="_blank" href="{% url 'correlation_scatter' pos_neg='negative' %}?correlation_name={{ pathwayCorr.get_p2a_display }} {{ pathwayCorr.pathway2.name }} {{ pathwayCorr.get_p1a_display }} {{ pathwayCorr.pathway1.name }}">Scatter Plot</a></td>
+      {% endif %}  
     </tr>
     {% endfor %}
   </tbody>
@@ -216,6 +227,14 @@
 </div>
 
 <script>
+
+function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
 
 const table = document.getElementById('sortMe');
 
@@ -433,5 +452,6 @@ var rad = document.myForm.fav_language;
       });
   }
 </script>
+
 
 {% endblock %}
