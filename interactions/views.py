@@ -483,6 +483,8 @@ def signalingNetworkPage(request):
 
 def plot_correlation_scatter(request, pos_neg):
     
+    hspcType = getHSPCcookie(request)
+
     correlation_name = request.GET.get('correlation_name')
 
     title = correlation_name
@@ -491,10 +493,10 @@ def plot_correlation_scatter(request, pos_neg):
     if 'Target' in correlation_name:
         correlation_name = correlation_name.replace("Target", 'receive')
 
-    guess = staticfiles_storage.path("download_files/all_"+pos_neg+"_correlations_hscMetacell.csv")
+    guess = staticfiles_storage.path("download_files/all_"+pos_neg+"_correlations_" + hspcType + "Metacell.csv")
     basis = pd.read_csv(guess, index_col = 0)
 
-    df_max_scaled = staticfiles_storage.path('download_files/hscMetacell_interactions_scaled.csv')
+    df_max_scaled = staticfiles_storage.path('download_files/' + hspcType + 'Metacell_interactions_scaled.csv')
     df_max_scaled = pd.read_csv(df_max_scaled, index_col = 0)
     
     specific_corr = basis[basis['TrueName'] == correlation_name]
@@ -506,8 +508,6 @@ def plot_correlation_scatter(request, pos_neg):
         correlation_name = correlation_name_split_part2 + " " + correlation_name_split_part1
         specific_corr = basis[basis['TrueName'] == correlation_name]
 
-
-    print(len(specific_corr))
     
     pathway1 = pd.DataFrame()
     pathway2 = pd.DataFrame()    
