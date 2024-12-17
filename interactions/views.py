@@ -552,8 +552,9 @@ def plot_correlation_scatter(request, pos_neg):
     fig = go.Figure()
 
     fig = px.scatter(toPlot, x= x_axis, y = y_axis, trendline = 'ols',
-                     trendline_color_override = linecolor, color_discrete_sequence = ['black'])
-
+                     trendline_color_override = linecolor, color_discrete_sequence = ['black'],
+                     )
+    fig.update_layout(hovermode=False)
     fig.update_layout(scene = go.layout.Scene(aspectratio = {'x':1, 'y':1}),
                       height = 400,
                       plot_bgcolor='rgba(0,0,0,0)')
