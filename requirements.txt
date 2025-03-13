@@ -13,7 +13,7 @@ gunicorn==20.1.0
 MarkupSafe==2.1.1
 matplotlib
 networkx==2.6.2
-nixpacks==1.29.1
+nixpkgs==1.29.1
 numpy==1.23.2
 pandas==1.5.0
 plotly==5.4.0
