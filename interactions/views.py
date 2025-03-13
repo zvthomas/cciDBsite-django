@@ -49,25 +49,62 @@ cell_type_proportions = {'CLP': 0.074845578,
  'Dendritic cells':  0.47,
  'Erythroblasts': 28.036}
 
-KLS_spatial_pvalue = {'Neutrophils': 0.966643096, 'Erythroblasts': 0.587418233, 'B cell': 1.099775133, 'EC-Arteriar': 1.87721653, 'EC-Sinusoidal': 3.759205485, 'MSPC-Adipo': 6.381276781, 'MSPC-Osteo': 6.381276781, 'T cells': 1.274467619, 'Dendritic cells': 1.134701735, 'GMP': 2.118434338, 'MEP': 2.141933006, 'Monocytes': 1.846794428, 'HSC': 12.83673889, 'MPP': 12.83673889, 'CMP': 1.276287817, 'CLP': 0.647591814}
+KLS_spatial_pvalue = {'Neutrophils': 0.966643096, 'Erythroblasts': 0.587418233, 'B cell': 1.099775133, 'EC-Arteriar': 1.87721653,
+                      'EC-Sinusoidal': 3.759205485, 'MSPC-Adipo': 6.381276781, 'MSPC-Osteo': 6.381276781, 'T cells': 1.274467619,
+                      'Dendritic cells': 1.134701735, 'GMP': 2.118434338, 'MEP': 2.141933006, 'Monocytes': 1.846794428,
+                      'HSC': 12.83673889, 'MPP': 12.83673889, 'CMP': 1.276287817, 'CLP': 0.647591814}
 
-MEP_spatial_pvalue = {'Neutrophils': 1.134389547, 'Erythroblasts': 0.687436463, 'B cell': 1.219862119, 'EC-Arteriar': 1.066141032, 'EC-Sinusoidal': 1.350647685, 'MSPC-Adipo': 1.198134108, 'MSPC-Osteo': 1.198134108, 'T cells': 1.446986139, 'Dendritic cells': 1.509321242, 'GMP': 1.568872768, 'MEP': 3.588684567, 'Monocytes': 1.701691206, 'HSC': 2.203514657, 'MPP': 2.203514657, 'CMP': 1.706437938, 'CLP': 0.869342193}
+MEP_spatial_pvalue = {'Neutrophils': 1.134389547, 'Erythroblasts': 0.687436463, 'B cell': 1.219862119, 'EC-Arteriar': 1.066141032,
+                      'EC-Sinusoidal': 1.350647685, 'MSPC-Adipo': 1.198134108, 'MSPC-Osteo': 1.198134108, 'T cells': 1.446986139,
+                      'Dendritic cells': 1.509321242, 'GMP': 1.568872768, 'MEP': 3.588684567, 'Monocytes': 1.701691206,
+                      'HSC': 2.203514657, 'MPP': 2.203514657, 'CMP': 1.706437938, 'CLP': 0.869342193}
 
-GMP_spatial_pvalue = {'Neutrophils': 0.948266884, 'Erythroblasts': 0.854901519, 'B cell': 1.040639476, 'EC-Arteriar': 1.124449318, 'EC-Sinusoidal': 1.439652345, 'MSPC-Adipo': 1.428992115, 'MSPC-Osteo': 1.428992115, 'T cells': 1.279855198, 'Dendritic cells': 1.589494537, 'GMP': 6.878198728, 'MEP': 1.571141937, 'Monocytes': 1.611571305, 'HSC': 2.258687428, 'MPP': 2.258687428, 'CMP': 2.045440578, 'CLP': 0.982363337}
+GMP_spatial_pvalue = {'Neutrophils': 0.948266884, 'Erythroblasts': 0.854901519, 'B cell': 1.040639476, 'EC-Arteriar': 1.124449318,
+                      'EC-Sinusoidal': 1.439652345, 'MSPC-Adipo': 1.428992115, 'MSPC-Osteo': 1.428992115, 'T cells': 1.279855198,
+                      'Dendritic cells': 1.589494537, 'GMP': 6.878198728, 'MEP': 1.571141937, 'Monocytes': 1.611571305,
+                      'HSC': 2.258687428, 'MPP': 2.258687428, 'CMP': 2.045440578, 'CLP': 0.982363337}
 
-CMP_spatial_pvalue = {'Neutrophils': 0.964586022, 'Erythroblasts': 0.80978427, 'B cell': 1.146620302, 'EC-Arteriar': 1.265054034, 'EC-Sinusoidal': 1.166467984, 'MSPC-Adipo': 1.045712139, 'MSPC-Osteo': 1.045712139, 'T cells': 1.168804887, 'Dendritic cells': 1.114616563, 'GMP': 2.458688788, 'MEP': 1.831683131, 'Monocytes': 1.2825187, 'HSC': 2.185727581, 'MPP': 2.185727581, 'CMP': 6.116084621, 'CLP': 1.426587295}
+CMP_spatial_pvalue = {'Neutrophils': 0.964586022, 'Erythroblasts': 0.80978427, 'B cell': 1.146620302, 'EC-Arteriar': 1.265054034,
+                      'EC-Sinusoidal': 1.166467984, 'MSPC-Adipo': 1.045712139, 'MSPC-Osteo': 1.045712139, 'T cells': 1.168804887,
+                      'Dendritic cells': 1.114616563, 'GMP': 2.458688788, 'MEP': 1.831683131, 'Monocytes': 1.2825187,
+                      'HSC': 2.185727581, 'MPP': 2.185727581, 'CMP': 6.116084621, 'CLP': 1.426587295}
 
-CLP_spatial_pvalue = {'Neutrophils': 0.990714824, 'Erythroblasts': 0.911156383, 'B cell': 1.392372321, 'EC-Arteriar': 1.052534173, 'EC-Sinusoidal': 0.814265403, 'MSPC-Adipo': 0.637125047, 'MSPC-Osteo': 0.637125047, 'T cells': 0.942937992, 'Dendritic cells': 1.435749445, 'GMP': 0.88959256, 'MEP': 0.989320166, 'Monocytes': 1.250350075, 'HSC': 0.935126203, 'MPP': 0.935126203, 'CMP': 0.970787627, 'CLP': 3.676524164}
+CLP_spatial_pvalue = {'Neutrophils': 0.990714824, 'Erythroblasts': 0.911156383, 'B cell': 1.392372321, 'EC-Arteriar': 1.052534173,
+                      'EC-Sinusoidal': 0.814265403, 'MSPC-Adipo': 0.637125047, 'MSPC-Osteo': 0.637125047, 'T cells': 0.942937992,
+                      'Dendritic cells': 1.435749445, 'GMP': 0.88959256, 'MEP': 0.989320166, 'Monocytes': 1.250350075,
+                      'HSC': 0.935126203, 'MPP': 0.935126203, 'CMP': 0.970787627, 'CLP': 3.676524164}
+
+KLS_spatial_iniche = {'Neutrophils': 0.870513923, 'Erythroblasts': 0.594584591, 'B cell': 1.085288232, 'EC-Arteriar': 2.221900637,
+                      'EC-Sinusoidal': 5.123134068, 'MSPC-Adipo': 8.235350998,'MSPC-Osteo': 8.235350998,'T cells': 1.012093793, 'Dendritic cells': 0.912145908,
+                      'GMP': 3.122276902, 'MEP': 2.547517799, 'Monocytes': 1.688492404, 'KLS': 26.79845834, 'CMP': 1.809825199, 'CLP': 0.681595783}
+MEP_spatial_iniche = {'Neutrophils': 1.027017169, 'Erythroblasts': 0.623274061, 'B cell': 1.103992649, 'EC-Arteriar': 1.262264693,
+                      'EC-Sinusoidal': 1.839055505, 'MSPC-Adipo': 2.335190778,'MSPC-Osteo': 2.335190778,'T cells': 1.276282533, 'Dendritic cells': 1.534602872,
+                      'GMP': 5.918830164, 'MEP': 4.526600526, 'Monocytes': 1.469816001, 'KLS': 6.615499939, 'CMP': 4.724198954, 'CLP': 0.956658488}
+GMP_spatial_iniche = {'Neutrophils': 0.893082276, 'Erythroblasts': 0.668647871, 'B cell': 0.992036277, 'EC-Arteriar': 1.547088954,
+                      'EC-Sinusoidal': 2.719085464, 'MSPC-Adipo': 3.846213041,'MSPC-Osteo': 3.846213041,'T cells': 0.976080972, 'Dendritic cells': 1.377448191,
+                      'GMP': 10.07540326, 'MEP': 2.254418104, 'Monocytes': 1.6447961, 'KLS': 10.71426174, 'CMP': 5.583027099, 'CLP': 0.854510698}
+CMP_spatial_iniche = {'Neutrophils': 0.900260883, 'Erythroblasts': 0.611567155, 'B cell': 1.002615358, 'EC-Arteriar': 2.074536174,
+                      'EC-Sinusoidal': 3.986705432, 'MSPC-Adipo': 6.512222761,'MSPC-Osteo': 6.512222761,'T cells': 0.960071791, 'Dendritic cells': 0.971940154,
+                      'GMP': 2.957201498, 'MEP': 2.874064379, 'Monocytes': 1.554744457, 'KLS': 20.58613684, 'CMP': 9.561074757, 'CLP': 0.878619619}
+CLP_spatial_iniche = {'Neutrophils': 1.022243378, 'Erythroblasts': 0.646840852, 'B cell': 1.219614677, 'EC-Arteriar': 1.230849931,
+                      'EC-Sinusoidal': 1.70212692, 'MSPC-Adipo': 2.137946093,'MSPC-Osteo':2.137946093, 'T cells': 1.193537649, 'Dendritic cells': 1.528236542,
+                      'GMP': 5.358391301, 'MEP': 4.145741274, 'Monocytes': 1.379459244, 'KLS': 5.966991466, 'CMP': 4.367956317, 'CLP': 2.391773299}
 
 pheno_dicts = {'hsc':KLS_spatial_pvalue, 'mpp':KLS_spatial_pvalue,
                'mep':MEP_spatial_pvalue, 'gmp':GMP_spatial_pvalue,
                'cmp': CMP_spatial_pvalue, 'clp': CLP_spatial_pvalue}
 
+iniche_dicts = {'hsc':KLS_spatial_iniche, 'mpp':KLS_spatial_iniche,
+               'mep':MEP_spatial_iniche, 'gmp':GMP_spatial_iniche,
+               'cmp': CMP_spatial_iniche, 'clp': CLP_spatial_iniche}
 
 r_pickle_path = staticfiles_storage.path("all_pathways/receiving_pathways_dictionary_db.pkl")
 s_pickle_path = staticfiles_storage.path("all_pathways/sending_pathways_dictionary_db.pkl")
 r_pickle_celltype = staticfiles_storage.path("all_pathways/receiving_celltypes_dictionary_db.pkl")
 s_pickle_celltype = staticfiles_storage.path("all_pathways/sending_celltypes_dictionary_db.pkl")
+
+specificity_index = staticfiles_storage.path("all_pathways/hspc_specificity_index_v4.csv")
+specificity_index = pd.read_csv(specificity_index, index_col = 0)
 
 with open(r_pickle_path, 'rb') as handle:
     receiving_pathways_dictionary_db = pickle.load(handle)
@@ -565,13 +602,6 @@ def plot_correlation_scatter(request, pos_neg):
     return render(request, 'correlation_scatter.html', context)
 
 
-    #lm = sns.lmplot(data = toPlot, x=pathwaySplit[0] + pathway_name1, y=pathwaySplit[2] + pathway_name2,
-    #             scatter_kws = {'color':'black','facecolors':'none', 's':7, 'edgecolor':'black', 'linewidth':0.5},
-    #                line_kws={'color':linecolor, 'linewidth':1})    
-    
-    return None
-
-
 
 
 
@@ -590,6 +620,8 @@ class PathwayDetailView(generic.DetailView):
         
         hspcType = getHSPCcookie(request)
 
+        SI_scores = specificity_index[hspcType.upper()]
+
         correction = getCorrectionCookie(request)
 
         pathway = get_object_or_404(Pathway, pk = kwargs['pk'])
@@ -597,6 +629,13 @@ class PathwayDetailView(generic.DetailView):
         pactsR = pathwayAndCelltype.objects.filter(pathway= pathway, sorr = 't', hscPercent__gt=0.05, hspc_type = hspcType)
         evidenceList = pathway.evidences
         pmids, keggs, pmcs = get_evidence_list(evidenceList)
+
+        SI_sending = "Not calculated"
+        SI_receiving = "Not calculated"
+        if 'sending ' + pathway.name in SI_scores.index:
+            SI_sending = SI_scores.loc['sending ' + pathway.name,]
+        if 'receiving ' + pathway.name in SI_scores.index:
+            SI_receiving = SI_scores.loc['receiving ' + pathway.name,]
 
         correlatedPathways1 = pathwayCorrelations.objects.filter(pathway1 = pathway, hspc_type = hspcType)
         correlatedPathways2 = pathwayCorrelations.objects.filter(pathway2 = pathway, hspc_type = hspcType)
@@ -635,17 +674,18 @@ class PathwayDetailView(generic.DetailView):
         #sheatmap_div = plot(sfig, output_type="div",)
         fig_total = plot(fig_total, output_type="div",)
         if len(pactsS) > 0 or len(pactsR) > 0:
-            plot_div = make_net_graph_JSON(pactsS, pactsR, hspcType, 'cts',correction)
+            plot_div = make_net_graph_JSON(pactsS, pactsR, hspcType, 'cts',correction, signaling_type = pathway.interaction_type)
             #plot_div = make_net_graph_spread(pactsS, pactsR, 'cts')
             context = {'pathway': pathway, 'pactsS': pactsS, 'pactsR': pactsR,
                         'plot_div': plot_div, 'ligands':ligands, 'receptors': receptors,
                         'pmids' : pmids, 'keggs' : keggs, 'pmcs' : pmcs,
                         'correlations1' : correlatedPathways1, 'correlations2' : correlatedPathways2, 'hspcType' : hspcType.upper(),
-                        'rheatmap_div':fig_total, 'sheatmap_div':fig_total}
+                        'rheatmap_div':fig_total, 'sheatmap_div':fig_total,
+                        'SI_sending': SI_sending, 'SI_receiving': SI_receiving}
             return render(request, 'interactions/pathway_detail.html', context)
         
         else:
-            return render(request, 'interactions/pathway_detail.html', context = {'pathway': pathway,'ligands':ligands, 'receptors': receptors, 'hspcType' : hspcType.upper()})
+            return render(request, 'interactions/pathway_detail.html', context = {'pathway': pathway,'ligands':ligands, 'receptors': receptors, 'hspcType' : hspcType.upper(), 'SI_sending': SI_sending, 'SI_receiving': SI_receiving})
 
 class CellClassListView(generic.ListView):
     model = cellClas
@@ -667,9 +707,10 @@ class CellClassDetailView(generic.DetailView):
         if str(cellclass) in cell_type_proportions.keys():
             ctp = cell_type_proportions[str(cellclass)]
         phenoMeasurement = 'NA'
-        if hspcType in ['hsc' ,'mpp', 'mep', 'gmp']:
+        if hspcType in ['hsc' ,'mpp', 'mep', 'gmp', 'cmp', 'clp']:
             if str(cellclass) in pheno_dicts[hspcType].keys():
                 phenoMeasurement = pheno_dicts[hspcType][str(cellclass)]
+                inicheMeasurement = iniche_dicts[hspcType][str(cellclass)]
 
         pactsS = pathwayAndCelltype.objects.filter(celltype= cellclass, sorr = 's', hscPercent__range=(0.05,2), hspc_type = hspcType)
         pactsR = pathwayAndCelltype.objects.filter(celltype= cellclass, sorr = 't', hscPercent__range=(0.05,2), hspc_type = hspcType)
@@ -715,7 +756,7 @@ class CellClassDetailView(generic.DetailView):
             plot_div = make_net_graph_JSON(pactsS, pactsR, hspcType, 'paths')
             #plot_div = make_net_graph_spread(pactsS, pactsR, 'paths')
             context = {'cellclass': cellclass, 'pactsS': pactsS, 'pactsR': pactsR,
-                        'plot_div': plot_div, 'hspcType' : hspcType.upper(), 'cellTypeProp': ctp, 'phenoPvalue': phenoMeasurement,
+                        'plot_div': plot_div, 'hspcType' : hspcType.upper(), 'cellTypeProp': ctp, 'phenoPvalue': phenoMeasurement, 'inicheValue' : inicheMeasurement,
                         'rheatmap_div':fig_total, 'sheatmap_div':fig_total}
             return render(request, 'interactions/cellclas_detail.html', context)
         
@@ -1366,7 +1407,7 @@ def make_net_graph_corr(correlations):
 
     return toret
 
-def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts', correction = 'none'):
+def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts', correction = 'none', signaling_type = 'c'):
     """ 
     View demonstrating how to display a graph object
     on a web page with Plotly. 
@@ -1377,9 +1418,11 @@ def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts', correcti
     list[1] = list of "from" names
     list[2] = list of "to" names
 
-
+    
 
     """
+    print(signaling_type)
+    
     max_score = 0
     min_score = 100
 
@@ -1426,8 +1469,13 @@ def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts', correcti
                     max_score_facs = ct.averageScore*cell_type_proportions[cn]
                 if ct.averageScore*cell_type_proportions[cn] < min_score_facs:
                     min_score_facs = ct.averageScore*cell_type_proportions[cn]
-            if hspc_type in ['hsc', 'mpp', 'mep', 'gmp']:
-                pheno_dict_to_use = pheno_dicts[hspc_type]
+            if hspc_type in ['hsc', 'mpp', 'mep', 'gmp', 'cmp', 'clp']:
+                if signaling_type == 'c':
+                    pheno_dict_to_use = iniche_dicts[hspc_type]
+                if signaling_type == 's':
+                    pheno_dict_to_use = pheno_dicts[hspc_type]
+                if signaling_type == 'e':
+                    pheno_dict_to_use = pheno_dicts[hspc_type]
                 if cn in pheno_dict_to_use.keys() and cn in cell_type_proportions.keys():
                     if ct.averageScore*cell_type_proportions[cn]*(pheno_dict_to_use[cn]) > max_score_pheno:
                         max_score_pheno = ct.averageScore*cell_type_proportions[cn]*(pheno_dict_to_use[cn])
@@ -1469,7 +1517,12 @@ def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts', correcti
                 if ct.averageScore*cell_type_proportions[cn] < min_score_facs:
                     min_score_facs = ct.averageScore*cell_type_proportions[cn]
             if hspc_type in ['hsc', 'mpp', 'mep', 'gmp', 'cmp', 'clp']:
-                pheno_dict_to_use = pheno_dicts[hspc_type]
+                if signaling_type == 'c':
+                    pheno_dict_to_use = iniche_dicts[hspc_type]
+                if signaling_type == 's':
+                    pheno_dict_to_use = pheno_dicts[hspc_type]
+                if signaling_type == 'e':
+                    pheno_dict_to_use = pheno_dicts[hspc_type]
                 if cn in pheno_dict_to_use.keys() and cn in cell_type_proportions.keys():
                     if ct.averageScore*cell_type_proportions[cn]*(pheno_dict_to_use[cn]) > max_score_pheno:
                         max_score_pheno = ct.averageScore*cell_type_proportions[cn]*(pheno_dict_to_use[cn])
@@ -1499,31 +1552,27 @@ def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts', correcti
     ecs = []
     urlList = []
     k = 0
+
+
+    if signaling_type == 'c':
+        pheno_dict_to_use = iniche_dicts[hspc_type]
+    if signaling_type == 's':
+        pheno_dict_to_use = pheno_dicts[hspc_type]
+    if signaling_type == 'e':
+        pheno_dict_to_use = pheno_dicts[hspc_type]
+
     for i in sending_dict_avgscore_hscP.keys():
 
         correction_coeff = 1
-        if correction == 'facs':
-            if i in cell_type_proportions.keys():
-                correction_coeff = cell_type_proportions[i]
-
-                range = max_score_facs - min_score_facs
-                a = sending_dict_avgscore_hscP[i][0]*correction_coeff
-                if range != 0:
-                    a = (a - min_score) / range
-                range2 = 9999
-                a = (a * range2)
-                fill_color.append(mpl.colors.to_hex(greys(int(a))))
-
-            else:
-                continue
-        elif correction == 'phenocycler':
+        
+        if correction == 'phenocycler':
             if hspc_type not in pheno_dicts.keys():
                 break
             if i in KLS_spatial_pvalue.keys():
-                correction_coeff = cell_type_proportions[i]*(pheno_dicts[hspc_type][i])
+                correction_coeff = cell_type_proportions[i]*(pheno_dict_to_use[i])
 
                 range = max_score_pheno - min_score_pheno
-                a = sending_dict_avgscore_hscP[i][0]*correction_coeff*(pheno_dicts[hspc_type][i])
+                a = sending_dict_avgscore_hscP[i][0]*correction_coeff*(pheno_dict_to_use[i])
                 if range != 0:
                     a = (a - min_score) / range
                 range2 = 9999
@@ -1556,28 +1605,15 @@ def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts', correcti
     for i in receiving_dict_avgscore_hscP.keys():
 
         correction_coeff = 1
-        if correction == 'facs':
-            if i in cell_type_proportions.keys():
-                correction_coeff = cell_type_proportions[i]
 
-                range = max_score_facs - min_score_facs
-                a = receiving_dict_avgscore_hscP[i][0]*correction_coeff
-                if range != 0:
-                    a = (a - min_score) / range
-                range2 = 9999
-                a = (a * range2)
-                fill_color.append(mpl.colors.to_hex(greys(int(a))))
-
-            else:
-                continue
-        elif correction == 'phenocycler':
+        if correction == 'phenocycler':
             if hspc_type not in pheno_dicts.keys():
                 break
             if i in KLS_spatial_pvalue.keys() and i in cell_type_proportions.keys():
-                correction_coeff = cell_type_proportions[i]*(pheno_dicts[hspc_type][i])
+                correction_coeff = cell_type_proportions[i]*(pheno_dict_to_use[i])
 
                 range = max_score_pheno - min_score_pheno
-                a = receiving_dict_avgscore_hscP[i][0]*correction_coeff*(pheno_dicts[hspc_type][i])
+                a = receiving_dict_avgscore_hscP[i][0]*correction_coeff*(pheno_dict_to_use[i])
                 if range != 0:
                     a = (a - min_score) / range
                 range2 = 9999

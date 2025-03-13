@@ -95,6 +95,10 @@
       {% endfor %}
     </ul>
   </p>
+  <p><strong>Specificity Index</strong>
+    HSPC as target: {{ SI_receiving|floatformat:3 }}<br>
+    HSPC as source: {{ SI_sending|floatformat:3 }}
+  </p>
   <p><strong>Graph Terms:</strong>
     <ul>
       <li><strong>Average Signaling Potential: </strong>Score given to cell-type pathway pair that describes the intensity of the potential interaction. This score is based on ligand/receptor gene expression levels.</li>

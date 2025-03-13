@@ -34,12 +34,19 @@ img {
     </p>
 
 <h3>Selecting a Correction Factor</h3>
-    <p>On the Pathways page you will be met with a menu on the left hand side beneath the HSPC menu 
-        prompting you to select a "Cell-Cell Signaling Score Correction". Selecting a correction (default none) 
-        will reload the page to display interaction data using the selected correction (Bone marrow proportion, or bone marrow proportion and spatial interaction). 
-        These corrections come from flow cytometry of bone marrow (bone marrow proportion) and Phenocycler measurement of spatial organization in the mouse bone marrow (spatial interaction). 
+    <p>On the Pathways page, you will be met with a menu on the left hand side beneath the HSPC menu 
+        prompting you to select a "Cell-Cell Signaling Value". Selecting a correction (default "Signaling Potential") 
+        will reload the page to display interaction data using the selected correction. These corrections come from 
+        flow cytometry of bone marrow (bone marrow proportion) and Phenocycler measurement of spatial organization in the mouse bone marrow (spatial enrichment). 
         As these are applied to interacting cell types, this correction is only offered on the <i>Pathways</i> page, however, the correction factors are provided 
         on the <i>Cell Types</i> page as well. 
+    </p>
+
+<h3>Specificity Index</h3>
+    <p>On the Pathways page, you will see a "Specificity Index" noted for HSPCs as a target and HSPCs as a source for that specific pathway. 
+        This is a value between 0 and 1, that quantifies how specific this pathway is for HSPCs compared to all other mouse cell types from 
+        other tissues, with 1 being most specific to HSPCs. This value was calculated based on percentile rank of interacting genes for each pathway. 
+        Some pathways do not have this information. This is due to missing gene data for some pathways.
     </p>
 
 <div class = 'row'>
