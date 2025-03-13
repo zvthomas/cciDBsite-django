@@ -1408,21 +1408,7 @@ def make_net_graph_corr(correlations):
     return toret
 
 def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts', correction = 'none', signaling_type = 'c'):
-    """ 
-    View demonstrating how to display a graph object
-    on a web page with Plotly. 
 
-    list of lists
-
-    list[0] = list of node names
-    list[1] = list of "from" names
-    list[2] = list of "to" names
-
-    
-
-    """
-    print(signaling_type)
-    
     max_score = 0
     min_score = 100
 
