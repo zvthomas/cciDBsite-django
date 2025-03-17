@@ -707,6 +707,7 @@ class CellClassDetailView(generic.DetailView):
         if str(cellclass) in cell_type_proportions.keys():
             ctp = cell_type_proportions[str(cellclass)]
         phenoMeasurement = 'NA'
+        inicheMeasurement = 'NA'
         if hspcType in ['hsc' ,'mpp', 'mep', 'gmp', 'cmp', 'clp']:
             if str(cellclass) in pheno_dicts[hspcType].keys():
                 phenoMeasurement = pheno_dicts[hspcType][str(cellclass)]
