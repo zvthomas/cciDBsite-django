@@ -1553,7 +1553,7 @@ def make_net_graph_JSON(sending, receiving, hspc_type, ct_or_p = 'cts', correcti
         correction_coeff = 1
         
         if correction == 'phenocycler':
-            if hspc_type not in pheno_dicts.keys():
+            if hspc_type not in pheno_dicts.keys() or i not in cell_type_proportions:
                 break
             if i in KLS_spatial_pvalue.keys():
                 correction_coeff = cell_type_proportions[i]*(pheno_dict_to_use[i])
