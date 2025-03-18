@@ -76,19 +76,19 @@ CLP_spatial_pvalue = {'Neutrophils': 0.990714824, 'Erythroblasts': 0.911156383, 
 
 KLS_spatial_iniche = {'Neutrophils': 0.870513923, 'Erythroblasts': 0.594584591, 'B cell': 1.085288232, 'EC-Arteriar': 2.221900637,
                       'EC-Sinusoidal': 5.123134068, 'MSPC-Adipo': 8.235350998,'MSPC-Osteo': 8.235350998,'T cells': 1.012093793, 'Dendritic cells': 0.912145908,
-                      'GMP': 3.122276902, 'MEP': 2.547517799, 'Monocytes': 1.688492404, 'KLS': 26.79845834, 'CMP': 1.809825199, 'CLP': 0.681595783}
+                      'GMP': 3.122276902, 'MEP': 2.547517799, 'Monocytes': 1.688492404, 'HSC': 26.79845834,'MPP': 26.79845834, 'CMP': 1.809825199, 'CLP': 0.681595783}
 MEP_spatial_iniche = {'Neutrophils': 1.027017169, 'Erythroblasts': 0.623274061, 'B cell': 1.103992649, 'EC-Arteriar': 1.262264693,
                       'EC-Sinusoidal': 1.839055505, 'MSPC-Adipo': 2.335190778,'MSPC-Osteo': 2.335190778,'T cells': 1.276282533, 'Dendritic cells': 1.534602872,
-                      'GMP': 5.918830164, 'MEP': 4.526600526, 'Monocytes': 1.469816001, 'KLS': 6.615499939, 'CMP': 4.724198954, 'CLP': 0.956658488}
+                      'GMP': 5.918830164, 'MEP': 4.526600526, 'Monocytes': 1.469816001, 'HSC': 6.615499939,'MPP': 6.615499939, 'CMP': 4.724198954, 'CLP': 0.956658488}
 GMP_spatial_iniche = {'Neutrophils': 0.893082276, 'Erythroblasts': 0.668647871, 'B cell': 0.992036277, 'EC-Arteriar': 1.547088954,
                       'EC-Sinusoidal': 2.719085464, 'MSPC-Adipo': 3.846213041,'MSPC-Osteo': 3.846213041,'T cells': 0.976080972, 'Dendritic cells': 1.377448191,
-                      'GMP': 10.07540326, 'MEP': 2.254418104, 'Monocytes': 1.6447961, 'KLS': 10.71426174, 'CMP': 5.583027099, 'CLP': 0.854510698}
+                      'GMP': 10.07540326, 'MEP': 2.254418104, 'Monocytes': 1.6447961, 'HSC': 10.71426174,'MPP': 10.71426174, 'CMP': 5.583027099, 'CLP': 0.854510698}
 CMP_spatial_iniche = {'Neutrophils': 0.900260883, 'Erythroblasts': 0.611567155, 'B cell': 1.002615358, 'EC-Arteriar': 2.074536174,
                       'EC-Sinusoidal': 3.986705432, 'MSPC-Adipo': 6.512222761,'MSPC-Osteo': 6.512222761,'T cells': 0.960071791, 'Dendritic cells': 0.971940154,
-                      'GMP': 2.957201498, 'MEP': 2.874064379, 'Monocytes': 1.554744457, 'KLS': 20.58613684, 'CMP': 9.561074757, 'CLP': 0.878619619}
+                      'GMP': 2.957201498, 'MEP': 2.874064379, 'Monocytes': 1.554744457, 'HSC': 20.58613684,'MPP': 20.58613684, 'CMP': 9.561074757, 'CLP': 0.878619619}
 CLP_spatial_iniche = {'Neutrophils': 1.022243378, 'Erythroblasts': 0.646840852, 'B cell': 1.219614677, 'EC-Arteriar': 1.230849931,
                       'EC-Sinusoidal': 1.70212692, 'MSPC-Adipo': 2.137946093,'MSPC-Osteo':2.137946093, 'T cells': 1.193537649, 'Dendritic cells': 1.528236542,
-                      'GMP': 5.358391301, 'MEP': 4.145741274, 'Monocytes': 1.379459244, 'KLS': 5.966991466, 'CMP': 4.367956317, 'CLP': 2.391773299}
+                      'GMP': 5.358391301, 'MEP': 4.145741274, 'Monocytes': 1.379459244, 'HSC': 5.966991466,'MPP': 5.966991466, 'CMP': 4.367956317, 'CLP': 2.391773299}
 
 pheno_dicts = {'hsc':KLS_spatial_pvalue, 'mpp':KLS_spatial_pvalue,
                'mep':MEP_spatial_pvalue, 'gmp':GMP_spatial_pvalue,
