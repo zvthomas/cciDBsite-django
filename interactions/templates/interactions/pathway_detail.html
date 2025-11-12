@@ -96,8 +96,8 @@
     </ul>
   </p>
   <p><strong>Specificity Index</strong>
-    HSPC as target: {{ SI_receiving|floatformat:3 }}<br>
-    HSPC as source: {{ SI_sending|floatformat:3 }}
+    HSPC as target: {{ pathway.specificity_index_r|floatformat:3 }}<br>
+    HSPC as source: {{ pathway.specificity_index_s|floatformat:3 }}
   </p>
   <p><strong>Graph Terms:</strong>
     <ul>
@@ -131,7 +131,7 @@
       <th>Correlation Name</th>
       <th>Pathway Name</th>
       <th>Pathway Category</th>
-      <th data-type="number">Correlation Score</th>
+      <th data-type="number">Correlation Z-score Score</th>
       <th data-type="number">-log10(adj. p-value)</th>
       <th> Plot </th>
    </tr>
@@ -253,6 +253,7 @@ const headers = table.querySelectorAll('th');
     });
 });
 
+
 // Query all rows
 const tableBody = table.querySelector('tbody');
 const rows = tableBody.querySelectorAll('tr');
@@ -282,8 +283,8 @@ const sortColumn = function (index) {
     const newRows = Array.from(rows);
     // Sort rows by the content of cells
     newRows.sort(function (rowA, rowB) {
-    const cellA = rowA.querySelectorAll('td')[index].innerHTML;
-    const cellB = rowB.querySelectorAll('td')[index].innerHTML;
+    const cellA = rowA.querySelectorAll('td')[index].innerText;
+    const cellB = rowB.querySelectorAll('td')[index].innerText;
 
     // Transform the content of cells
     const a = transform(index, cellA);
@@ -311,6 +312,12 @@ const sortColumn = function (index) {
         tableBody.appendChild(newRow);
     });
 };
+
+window.addEventListener('load', () => {
+  sortColumn(3);
+  sortColumn(3);
+});
+
 
 for (const cell of document.getElementsByClassName("corr")){
   if (parseFloat(cell.innerHTML) > 0){

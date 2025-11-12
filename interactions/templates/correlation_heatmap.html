@@ -151,28 +151,10 @@ input[type=range]:focus::-ms-fill-upper {
     
     <h3>How Correlations were Calculated</h3>
     <p>
-        Spearman rank correlations at the single cell level were calcualted across all cell type-pathway pairs  (i.e. HSC source T-cells MHC-I target).
-        Correlations were filtered such that pathways in a pair shared no functional genes.
-        They were then filtered such that their adjusted p-value < 0.05. These correlations were then collapsed to pathway level correlations by 
-        averaging their cell type-pathway pair correlations and taking the best adjusted p-value. 
+        A weighted Spearman rank correlation was calculated for individual HSPCs between all detected signaling pathways and interacting cell types, using metacell size as weight. Pathway pairs sharing at least one common gene were excluded to avoid artificially inflating the Spearman correlation coefficient. This removed about one fifth (20.76%) of the identified cell-type-pathway correlations. The correlated signaling pathways were selected by p-value < 0.05 after Bonferroni correction. A background distribution of spearman rank correlations for each individual correlation was calculated by shuffling values of both pathways 500 times. Using this background distribution, we calculated a z-score for each correlation. Correlations were further filtered such that |z-score| > 1.96. Correlations involving identical pathways across different cell types were aggregated by averaging their z-scores.
         <br>
     </p>
     
-          <p>
-        As an example, the top 10 positive and negative pathway correlations for HSCs are shown below. 
-        Here, the highest positive correlation in HSCs is between HSC CCL source and HSC PARs source (r = 0.736).
-        The highest negative correlations in HSCs is between HSC MHC-I source and HSC PARs target 
-        (r = -0.403).
-          </p>
-        <div class="row">
-          <div class="column">
-              <img src="{% static "imgs/top10_positive_corr_paths_min_pval_5per_HSC.png" %}" alt="colormap" style="width:75%;"/>
-          </div>
-    
-          <div class="column">
-              <img src="{% static "imgs/top10_negative_corr_paths_min_pval_5per_HSC.png" %}" alt="colormap" style="width:75%;"/>            
-          </div>
-      </div>
 
 <div class="row">
 

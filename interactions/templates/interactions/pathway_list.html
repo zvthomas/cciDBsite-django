@@ -181,7 +181,8 @@
             <th>Signaling Pathway Name</th>
             <th>Signaling Pathway Category</th>
             <th data-type="number">Number of Active Cell Types Across all HSPCs</th>
-            <th data-type="number">Highest Interaction Intensity Across all HSPCs</th>
+            <th>Specificity Index (Receiving)</th>
+            <th>Specificity Index (Sending)</th>
          </tr>
         </thead>
         <tbody>
@@ -193,7 +194,10 @@
             <td>{{ pathway.get_interaction_type_display }}</td>
             
             <td>{{ pathway.get_pathway_number }}</td>
-            <td>{{ pathway.get_highest_interaction_score|floatformat:3 }}</td>
+
+            <td>{{ pathway.specificity_index_r|floatformat:3  }}</td>
+
+            <td>{{ pathway.specificity_index_s|floatformat:3  }}</td>
           </tr>
           {% endif %}
           {% endfor %}
@@ -244,8 +248,8 @@ const sortColumn = function (index) {
     const newRows = Array.from(rows);
     // Sort rows by the content of cells
     newRows.sort(function (rowA, rowB) {
-    const cellA = rowA.querySelectorAll('td')[index].innerHTML;
-    const cellB = rowB.querySelectorAll('td')[index].innerHTML;
+    const cellA = rowA.querySelectorAll('td')[index].innerText;
+    const cellB = rowB.querySelectorAll('td')[index].innerText;
 
     // Transform the content of cells
     const a = transform(index, cellA);
@@ -368,7 +372,10 @@ const sortColumn = function (index) {
           }
         }
 
-document.onload = sortColumn(3);
+window.addEventListener('load', () => {
+  sortColumn(3);
+  sortColumn(3)
+});
 </script>
 
 </body>

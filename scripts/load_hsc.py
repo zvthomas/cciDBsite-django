@@ -4,6 +4,9 @@ import pandas as pd
 import numpy as np
 # import all the code to properly extract relevant data from cellchat outputs
 
+
+specificity_index = pd.read_csv("C:/Users/zthomas/Documents/cciDB/cciDB/cciDBsite/staticfiles/all_pathways/pathway_scale_factors.csv")
+
 non_barcodes = ["Chondrocytes","EC-Arteriar","EC-Arteriolar","EC-Sinusoidal",
                         "Fibroblasts","MSPC-Adipo","MSPC-Osteo","Myofibroblasts","Osteo",
                         "Osteoblasts","Pericytes","Schwann-cells","Smooth-muscle", 
@@ -130,17 +133,39 @@ def run():
                     if nzfa[0] == 0.0:
                         nzfa[1] = 0.0
                     
+                    si = specificity_index[specificity_index['Pathway'] == col]
+                    si = si[si['Direction'] == 'sending']
+                    if len(si) > 0:
+                        si_s = float(list(si['max(LR) scale factor'])[0])
+                    else:
+                        si_s = 0
+                    
+                    si = specificity_index[specificity_index['Pathway'] == col]
+                    si = si[si['Direction'] == 'receiving']
+                    if len(si) > 0:
+                        si_r = float(list(si['max(LR) scale factor'])[0])
+                    else:
+                        si_r = 0
+                    
+                    
+                    
                     pathway, _ = Pathway.objects.get_or_create(name = col,
                                                             interaction_type = signal_code[signal_type],
+                                                            specificity_index_s = si_s,
+                                                            specificity_index_r = si_r,
                                                             evidences = "")
                     
                     ct, _ = cellClas.objects.get_or_create(name = row, cell_type=get_cell_code(row))
                     ct.sendingPathways.add(pathway)
 
+
+                    
+
                     pathwayAndCelltype.objects.get_or_create(pathway = pathway,
                                                     celltype = ct,
                                                     hscPercent = nzfa[0],
                                                     averageScore = nzfa[1],
+                                                    specificity_index = si_s,
                                                     sorr = 's',
                                                     hspc_type = HSPC_TYPE)
 
@@ -152,17 +177,37 @@ def run():
                     if nzfa[0] == 0.0:
                         nzfa[1] = 0.0
 
+
+                    si = specificity_index[specificity_index['Pathway'] == col]
+                    si = si[si['Direction'] == 'sending']
+                    if len(si) > 0:
+                        si_s = float(list(si['max(LR) scale factor'])[0])
+                    else:
+                        si_s = 0
+                    
+                    si = specificity_index[specificity_index['Pathway'] == col]
+                    si = si[si['Direction'] == 'receiving']
+                    if len(si) > 0:
+                        si_r = float(list(si['max(LR) scale factor'])[0])
+                    else:
+                        si_r = 0
+
+
                     pathway, _ = Pathway.objects.get_or_create(name = col,
                                                             interaction_type = signal_code[signal_type],
+                                                            specificity_index_s = si_s,
+                                                            specificity_index_r = si_r,
                                                             evidences = "")
                     
                     ct, _ = cellClas.objects.get_or_create(name = row, cell_type=get_cell_code(row))
                     ct.receivingPathways.add(pathway)
 
+
                     pathwayAndCelltype.objects.get_or_create(pathway = pathway,
                                                     celltype = ct,
                                                     hscPercent = nzfa[0],
                                                     averageScore = nzfa[1],
+                                                    specificity_index = si_r,
                                                     sorr = 't',
                                                     hspc_type = HSPC_TYPE)
                 
@@ -199,12 +244,12 @@ def run():
         receptor.save()
         ligand.save()
 
-    
+    # Set up z-score correlations
     
     for HSPC_TYPE in ['hsc', 'clp', 'cmp', 'gmp', 'mep', 'mpp']:
 
-        pos_correlations = pd.read_csv("P:/zthomas/Intercellular Interactions Project/cluster_analysis/pathway_correlations/" + HSPC_TYPE + "Metacell_meanpos_corr.csv")
-        neg_correlations = pd.read_csv("P:/zthomas/Intercellular Interactions Project/cluster_analysis/pathway_correlations/" + HSPC_TYPE + "Metacell_meanneg_corr.csv")
+        pos_correlations = pd.read_csv("P:/zthomas/Intercellular Interactions Project/cluster_analysis/pathway_correlations/" + HSPC_TYPE + "Metacell_meanpos_corr_zscore_500_v1.csv")
+        neg_correlations = pd.read_csv("P:/zthomas/Intercellular Interactions Project/cluster_analysis/pathway_correlations/" + HSPC_TYPE + "Metacell_meanneg_corr_zscore_500_v1.csv")
         
         # change send and receive to source and target
         name_change = {'s':'s', 'r':'t'}

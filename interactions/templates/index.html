@@ -107,37 +107,6 @@
     </p>
   </div>
 
-<h2>Summary Table</h2>
-
-<i>Click on a column name to sort</i>
-<table id="sortMe" class="table">
-    <thead>
-      <tr>
-        <th>HSPC Type</th>
-        <th>Communication Type (HSPCs are...)</th>
-        <th>Pathway Type</th>
-        <th>Cell Type</th>
-        <th>Pathway Name</th>
-        <th>Interacting HSPC Fraction</th>
-        <th>Interaction Intensity</th>
-        
-     </tr>
-    </thead>
-    <tbody>
-      {% for pairs in for_table %}
-      <tr>
-        <td>{{ pairs.hspc_type|upper }}</td>        
-        <td>{{ pairs.get_sorr_display }}</td>
-        <td><a href="{{ pairs.pathway.get_absolute_url }}">{{pairs.pathway.name}}</a></td>
-        <td><a href="{{ pairs.celltype.get_absolute_url }}">{{pairs.celltype.name}}</a></td>
-        <td>{{ pairs.pathway.get_interaction_type_display }}</td>
-        <td>{{pairs.hscPercent|floatformat:3}}</td>
-        <td>{{pairs.averageScore|floatformat:3}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-</table>
-
 
     
 <script>
@@ -184,8 +153,8 @@
       const newRows = Array.from(rows);
       // Sort rows by the content of cells
       newRows.sort(function (rowA, rowB) {
-      const cellA = rowA.querySelectorAll('td')[index].innerHTML;
-      const cellB = rowB.querySelectorAll('td')[index].innerHTML;
+      const cellA = rowA.querySelectorAll('td')[index].innerText;
+      const cellB = rowB.querySelectorAll('td')[index].innerText;
   
       // Transform the content of cells
       const a = transform(index, cellA);

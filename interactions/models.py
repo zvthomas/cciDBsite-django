@@ -19,7 +19,8 @@ class Pathway(models.Model):
 
     ligands = models.ManyToManyField('Ligand', related_name='pathway_ligand')
     receptors = models.ManyToManyField('Receptor', related_name='pathway_receptor')
-
+    specificity_index_s = models.FloatField(default = 0)
+    specificity_index_r = models.FloatField(default = 0)
     evidences = models.TextField(default = '')
 
     class Meta:
@@ -124,7 +125,8 @@ class pathwayAndCelltype(models.Model):
     #hscPercent is really single cell percent since we added HSPCs
     hscPercent = models.FloatField(default = 0)
     averageScore = models.FloatField(default = 0)
-
+    specificity_index = models.FloatField(default = 0)
+    
     #
     # NEW FOR HSPCs
     #
@@ -154,5 +156,5 @@ class pathwayCorrelations(models.Model):
     p1a = models.CharField(max_length = 1, choices = SIGNAL_STATUS, default = 's')
     pathway2 = models.ForeignKey(Pathway,on_delete=models.SET_NULL, null=True, related_name='pathway2')
     p2a = models.CharField(max_length = 1, choices = SIGNAL_STATUS, default = 's')
-    correlation = models.FloatField(default = 0)
-    pval = models.FloatField(default = 0)
+    correlation = models.FloatField(default = 0, null = True)
+    pval = models.FloatField(default = 0, null = True)

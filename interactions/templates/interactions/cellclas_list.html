@@ -162,7 +162,6 @@
           <th>Cell Name</th>
           <th>Cell Type</th>
           <th data-type="number">Number of Pathways Across all HSPCs</th>
-          <th data-type="number">Highest Interaction Intensity Across all HSPCs</th>
        </tr>
       </thead>
       <tbody>
@@ -173,7 +172,6 @@
           <td>{{ cell.get_cell_type_display }}</td> 
           
           <td>{{ cell.get_pathway_number }}</td>
-          <td>{{ cell.get_highest_interaction_score|floatformat:3 }}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -328,7 +326,8 @@ const sortColumn = function (index) {
           }
         }
 
-        document.onload = sortColumn(3);
+        document.onload = sortColumn(2);
+        document.onload = sortColumn(2);
 </script>
 
 

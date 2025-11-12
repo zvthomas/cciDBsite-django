@@ -103,9 +103,6 @@ s_pickle_path = staticfiles_storage.path("all_pathways/sending_pathways_dictiona
 r_pickle_celltype = staticfiles_storage.path("all_pathways/receiving_celltypes_dictionary_db.pkl")
 s_pickle_celltype = staticfiles_storage.path("all_pathways/sending_celltypes_dictionary_db.pkl")
 
-specificity_index = staticfiles_storage.path("all_pathways/hspc_specificity_index_v4.csv")
-specificity_index = pd.read_csv(specificity_index, index_col = 0)
-
 with open(r_pickle_path, 'rb') as handle:
     receiving_pathways_dictionary_db = pickle.load(handle)
 
@@ -475,7 +472,7 @@ def correlations_heatmap(request):
 
     hspcType = getHSPCcookie(request)
 
-    guess = staticfiles_storage.path('download_files/' + hspcType + '_correlations_pivot.csv')
+    guess = staticfiles_storage.path('download_files/' + hspcType + 'Metacell_correlations_pivot_zscore_HISE.csv')
     correlation_pivot_both = pd.read_csv(guess, index_col = 0)
 
     correlation_pivot_both_values = correlation_pivot_both.values.tolist()
@@ -620,7 +617,7 @@ class PathwayDetailView(generic.DetailView):
         
         hspcType = getHSPCcookie(request)
 
-        SI_scores = specificity_index[hspcType.upper()]
+        
 
         correction = getCorrectionCookie(request)
 
@@ -630,12 +627,6 @@ class PathwayDetailView(generic.DetailView):
         evidenceList = pathway.evidences
         pmids, keggs, pmcs = get_evidence_list(evidenceList)
 
-        SI_sending = "Not calculated"
-        SI_receiving = "Not calculated"
-        if 'sending ' + pathway.name in SI_scores.index:
-            SI_sending = SI_scores.loc['sending ' + pathway.name,]
-        if 'receiving ' + pathway.name in SI_scores.index:
-            SI_receiving = SI_scores.loc['receiving ' + pathway.name,]
 
         correlatedPathways1 = pathwayCorrelations.objects.filter(pathway1 = pathway, hspc_type = hspcType)
         correlatedPathways2 = pathwayCorrelations.objects.filter(pathway2 = pathway, hspc_type = hspcType)
@@ -680,12 +671,11 @@ class PathwayDetailView(generic.DetailView):
                         'plot_div': plot_div, 'ligands':ligands, 'receptors': receptors,
                         'pmids' : pmids, 'keggs' : keggs, 'pmcs' : pmcs,
                         'correlations1' : correlatedPathways1, 'correlations2' : correlatedPathways2, 'hspcType' : hspcType.upper(),
-                        'rheatmap_div':fig_total, 'sheatmap_div':fig_total,
-                        'SI_sending': SI_sending, 'SI_receiving': SI_receiving}
+                        'rheatmap_div':fig_total, 'sheatmap_div':fig_total}
             return render(request, 'interactions/pathway_detail.html', context)
         
         else:
-            return render(request, 'interactions/pathway_detail.html', context = {'pathway': pathway,'ligands':ligands, 'receptors': receptors, 'hspcType' : hspcType.upper(), 'SI_sending': SI_sending, 'SI_receiving': SI_receiving})
+            return render(request, 'interactions/pathway_detail.html', context = {'pathway': pathway,'ligands':ligands, 'receptors': receptors, 'hspcType' : hspcType.upper()})
 
 class CellClassListView(generic.ListView):
     model = cellClas
