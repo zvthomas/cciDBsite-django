@@ -262,13 +262,14 @@ def run():
                     p2 = cor['Pathway 2'].split()[1:][0]
                     p2a = name_change[cor['Pathway 2'].split()[0][0]]
 
-                    corr = cor['Correlation']
-                    pval = cor['Adj. P-val']
+                    corr = float(cor['Correlation'])
+                    pval = float(cor['Adj. P-val'])
                     
                     pathway1, _ = Pathway.objects.get_or_create(name = p1)
                     pathway2, _ = Pathway.objects.get_or_create(name = p2)
 
-                    pathwayCorrelations.objects.get_or_create(pathway1 = pathway1,
+                    if abs(corr) > 0:
+                        pathwayCorrelations.objects.get_or_create(pathway1 = pathway1,
                                                             pathway2 = pathway2,
                                                             p1a = p1a,
                                                             p2a = p2a,

@@ -128,11 +128,11 @@
 <table id="sortMe" class="table">
   <thead>
     <tr>
-      <th>Correlation Name</th>
-      <th>Pathway Name</th>
-      <th>Pathway Category</th>
-      <th data-type="number">Correlation Z-score Score</th>
-      <th data-type="number">-log10(adj. p-value)</th>
+      <th onclick="sortTable('sortMe', 0)">Correlation Name</th>
+      <th onclick="sortTable('sortMe', 1)">Pathway Name</th>
+      <th onclick="sortTable('sortMe', 2)">Pathway Category</th>
+      <th onclick="sortTable('sortMe', 3)" data-type="number">Correlation Z-score Score</th>
+      <th onclick="sortTable('sortMe', 4)" data-type="number">-log10(adj. p-value)</th>
       <th> Plot </th>
    </tr>
   </thead>
@@ -245,13 +245,6 @@ const table = document.getElementById('sortMe');
 // Query the headers
 const headers = table.querySelectorAll('th');
 
-// Loop over the headers
-[].forEach.call(headers, function (header, index) {
-    header.addEventListener('click', function () {
-        // This function will sort the column
-        sortColumn(index);
-    });
-});
 
 
 // Query all rows
@@ -271,52 +264,40 @@ const transform = function (index, content) {
 const directions = Array.from(headers).map(function (header) {
     return '';
 });
-const sortColumn = function (index) {
-    // Clone the rows
-    
-    // Get the current direction
-    const direction = directions[index] || 'asc';
 
-    // A factor based on the direction
-    const multiplier = (direction === 'asc') ? 1 : -1;
-    
-    const newRows = Array.from(rows);
-    // Sort rows by the content of cells
-    newRows.sort(function (rowA, rowB) {
-    const cellA = rowA.querySelectorAll('td')[index].innerText;
-    const cellB = rowB.querySelectorAll('td')[index].innerText;
 
-    // Transform the content of cells
-    const a = transform(index, cellA);
-    const b = transform(index, cellB);
+function sortTable(tableId, colIndex) {
+    const table = document.getElementById(tableId);
+    const tbody = table.querySelector("tbody");
+    const rows = Array.from(tbody.querySelectorAll("tr"));
 
-    // And compare them
-    switch (true) {
-        case a > b:
-            return 1* multiplier;
-        case a < b:
-            return -1* multiplier;
-        case a === b:
-            return 0;
-    }
-});
-    directions[index] = direction === 'asc' ? 'desc' : 'asc';
+    // Get current sort direction
+    const th = table.querySelectorAll("th")[colIndex];
+    const currentDir = th.dataset.sort === "asc" ? "desc" : "asc";
+    th.dataset.sort = currentDir;
 
-    // Remove old rows
-    [].forEach.call(rows, function (row) {
-        tableBody.removeChild(row);
+    rows.sort((rowA, rowB) => {
+        let cellA = rowA.children[colIndex].innerText.trim();
+        let cellB = rowB.children[colIndex].innerText.trim();
+
+        // Convert to numbers if numeric
+        const numA = parseFloat(cellA);
+        const numB = parseFloat(cellB);
+
+        // Check if both numeric
+        if (!isNaN(numA) && !isNaN(numB)) {
+            return currentDir === "asc" ? numA - numB : numB - numA;
+        }
+
+        // Default to string comparison
+        return currentDir === "asc"
+            ? cellA.localeCompare(cellB)
+            : cellB.localeCompare(cellA);
     });
 
-    // Append new row
-    newRows.forEach(function (newRow) {
-        tableBody.appendChild(newRow);
-    });
-};
-
-window.addEventListener('load', () => {
-  sortColumn(3);
-  sortColumn(3);
-});
+    // Rebuild table body
+    rows.forEach(row => tbody.appendChild(row));
+}
 
 
 for (const cell of document.getElementsByClassName("corr")){
@@ -462,6 +443,12 @@ var rad = document.myForm.fav_language;
           chart.group(this.value).labels().fontWeight(700);
       });
   }
+
+
+window.addEventListener('load', () => {
+  sortTable('sortMe', 4);
+  sortTable('sortMe', 4);
+});
 </script>
 
 
